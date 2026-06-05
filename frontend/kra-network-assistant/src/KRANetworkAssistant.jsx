@@ -1,7 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 
-const GROQ_MODEL = "llama-3.3-70b-versatile";
-
 // ── KRA Enterprise Theme ─────────────────────────────────────────────────────
 // Clean government aesthetic: white surfaces, KRA green, official typography
 // Inspired by Kenya e-government portals and enterprise ICT systems
@@ -9,25 +7,22 @@ const GROQ_MODEL = "llama-3.3-70b-versatile";
 const T = {
   kraGreen: "#00843D",
   kraGreenDark: "#006830",
-  kraGreenLight: "#E6F4EA",
-  kraRed: "#C8102E",
-  kraRedDark: "#9E0B22",
-  kraRedLight: "#FBE9EC",
-  kraGold: "#FFC72C",
-  kraGoldLight: "#FFF6D6",
+  kraGreenLight: "#E8F5EE",
+  kraGold: "#F9A825",
+  kraGoldLight: "#FFF8E1",
 
-  danger: "#C8102E",
-  dangerLight: "#FBE9EC",
-  warning: "#FFC72C",
-  warningLight: "#FFF6D6",
-  success: "#00843D",
-  successLight: "#E6F4EA",
-  info: "#006830",
-  infoLight: "#E6F4EA",
+  danger: "#C62828",
+  dangerLight: "#FFEBEE",
+  warning: "#E65100",
+  warningLight: "#FFF3E0",
+  success: "#1B5E20",
+  successLight: "#E8F5E9",
+  info: "#0D47A1",
+  infoLight: "#E3F2FD",
 
-  bg: "#F4F6F8",
+  bg: "#F0F2F5",
   surface: "#FFFFFF",
-  surfaceAlt: "#F9FAFB",
+  surfaceAlt: "#F8FAFB",
   border: "#DDE2E8",
   borderDark: "#C5CDD6",
 
@@ -35,10 +30,10 @@ const T = {
   textSecondary: "#4A5568",
   textMuted: "#8896A6",
 
-  sidebar: "#006830",
-  sidebarHover: "#007538",
+  sidebar: "#003D1E",
+  sidebarHover: "#00521E",
   sidebarActive: "#00843D",
-  sidebarText: "#CFE6D6",
+  sidebarText: "#A8C4A8",
   sidebarActiveText: "#FFFFFF",
 };
 
