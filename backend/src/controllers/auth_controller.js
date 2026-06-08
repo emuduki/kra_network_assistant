@@ -3,7 +3,7 @@ const pool = require('../db/pool');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
 
-async function register(req, res, next) {
+async function login(req, res, next) {
     try {
         const { email, password } = req.body;
 
@@ -11,8 +11,9 @@ async function register(req, res, next) {
             return res.status(400).json({ error: 'Email and password are required.' });
         }
 
+        // NOTE: must select ALL fields required for bcrypt compare + JWT claims
         const result = await pool.query(
-            'SELECT id FROM users WHERE email = $1',
+            'SELECT id, email, name, role, password_hash FROM users WHERE email = $1',
             [email.toLowerCase().trim()]
         );
 
@@ -30,8 +31,8 @@ async function register(req, res, next) {
 
         const token = jwt.sign(
             { id: user.id, email: user.email, name: user.name, role: user.role },
-            config.jwtSecret,
-            { expiresIn: config.jwtExpiresIn }
+            config.JWT.secret,
+            { expiresIn: config.JWT.expiresIn }
         );
 
         res.json({
@@ -43,4 +44,9 @@ async function register(req, res, next) {
     }
 }
 
-module.exports = { login: register };
+// Keeping register stub for route completeness; implement separately if you need user creation.
+async function register(req, res) {
+    return res.status(501).json({ error: 'Register is not implemented.' });
+}
+
+module.exports = { login, register };

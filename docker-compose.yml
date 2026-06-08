@@ -12,8 +12,12 @@ services:
     env_file:
       - ./backend/.env
     environment:
-      # Override DB_HOST to use the service name instead of localhost
+      # Force backend DB credentials to match the Postgres container
       DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: kra_network
+      DB_USER: kra_user
+      DB_PASSWORD: secret
     depends_on:
       db:
         condition: service_healthy
@@ -36,7 +40,8 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
       # Auto-run seed/init SQL on first start
-      - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./docker/postgres/10-auth-trust.sh:/docker-entrypoint-initdb.d/10-auth-trust.sh
+      - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/20-init.sql
     healthcheck:
       test: ['CMD-SHELL', 'pg_isready -U kra_user -d kra_network']
       interval: 5s

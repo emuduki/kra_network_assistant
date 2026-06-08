@@ -4,14 +4,14 @@ require('dotenv').config();
 
 module.exports = {
     port: process.env.PORT || 4000,
-    nodeEnv: process.snv.NODE_ENV || 'development',
+    nodeEnv: process.env.NODE_ENV || 'development',
 
     db: {
         host: process.env.DB_HOST || 'localhost',
         port: parseInt(process.env.DB_PORT || '5432'),
         database: process.env.DB_NAME || 'kra_network',
-        user: process.env.DB_USER || 'postgres',
-        password: process.env.DB_PASSWORD || 'password',
+        user: process.env.DB_USER || 'kra_user',
+        password: process.env.DB_PASSWORD || 'secret',
         // Render/Railway provide a full connection string instead
         connectionString: process.env.DATABASE_URL || null,
     },

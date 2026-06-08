@@ -54,9 +54,9 @@ CREATE TABLE IF NOT EXISTS log_entries (
 -- ─────────────────────────────────────────────────────────────────────────────
 
 INSERT INTO users (name, email, password_hash, role) VALUES
-  ('J. Kariuki',   'kariuki@kra.go.ke',  '$2b$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin'),
-  ('A. Omondi',    'omondi@kra.go.ke',   '$2b$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'ict_officer'),
-  ('M. Wangari',   'wangari@kra.go.ke',  '$2b$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'ict_officer')
+  ('J. Kariuki',   'kariuki@kra.go.ke',  '$2b$10$FC2TndMxhvD0X/N6GZTWqeHkYj6tX4V3JxDweHgTNHF4wWZNmRQji', 'admin'),
+  ('A. Omondi',    'omondi@kra.go.ke',   '$2b$10$FC2TndMxhvD0X/N6GZTWqeHkYj6tX4V3JxDweHgTNHF4wWZNmRQji', 'ict_officer'),
+  ('M. Wangari',   'wangari@kra.go.ke',  '$2b$10$FC2TndMxhvD0X/N6GZTWqeHkYj6tX4V3JxDweHgTNHF4wWZNmRQji', 'ict_officer')
 ON CONFLICT (email) DO NOTHING;
 
 INSERT INTO tunnels (name, tunnel_ref, peer_ip, status, latency_ms, uptime_pct) VALUES

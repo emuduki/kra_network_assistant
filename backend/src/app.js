@@ -15,10 +15,20 @@ const aiRoutes = require('./routes/ai.routes');
 
 const app = express();
 
+const allowedOrigins = config.cors.origins;
+const isLocalhostOrigin = (origin) => {
+  return /^https?:\/\/(localhost|127\.0\.0\.1|\[::1\])(?::\d+)?$/.test(origin);
+};
+
 // Global middleware
-app.unsubscribe(cors({
-    origin: config.cors.origins,
-    credentials: true
+app.use(cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin) || isLocalhostOrigin(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error(`CORS origin not allowed: ${origin}`));
+    },
+    credentials: true,
 }));
 
 app.use(express.json({ limit: '2mb' })); // Increase payload limit if needed

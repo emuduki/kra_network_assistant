@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const auth = require('../middleware/auth.middleware');
-const { aiLimiter } = require('../middleware/rateLimiter');
-const { analyzeLog, chatWithAssistant } = require('../services/claude.service');
+const auth = require('../middleware/auth.middleware.js');
+const { aiLimiter } = require('../middleware/rateLimiter.js');
+const { analyzeLog, chatWithAssistant } = require('../services/claude.services.js');
 const pool = require('../db/pool');
 
 router.use(auth); 
