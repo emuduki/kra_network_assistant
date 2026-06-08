@@ -1,9 +1,37 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
 
 # dependencies
 /node_modules
 /.pnp
 .pnp.js
+
+#  Environment variables — NEVER commit these 
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# Build outputs 
+dist/
+build/
+.next/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+#  OS & editor 
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+#  Docker local volumes
+pgdata/
+
 
 # testing
 /coverage
