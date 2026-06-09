@@ -1,4 +1,4 @@
-import { PageHeader } from "../components/index.jsx";
+import { PageHeader } from "../../components/index.jsx";
 
 export default function Dashboard() {
     return (
@@ -8,5 +8,5 @@ export default function Dashboard() {
                 Phase 3 - connect to live API. Scaffold in placee.
             </p>
         </div>
-    )
+    );
 }

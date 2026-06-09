@@ -5,20 +5,49 @@ import Login from './pages/Login.jsx';
 
 // Lazy-load pages for faster initial load
 import { lazy, Suspense } from 'react';
-const Dashboard = lazy(() => import('./pages/Dashboard.jsx'));
-const Incidents = lazy(() => import('./pages/Incidents.jsx'));
-const VPNHealth = lazy(() => import('./pages/VPNHealth.jsx'));
-const Topology = lazy(() => import('./pages/Topology.jsx'));
-const Diagnostics = lazy(() => import('./pages/Diagnostics.jsx'));
-const Assistant = lazy(() => import('./pages/Assistant.jsx'));
-const Reports = lazy(() => import('./pages/Reports.jsx'));
+// Admin pages
+const AdminDashboard = lazy(() => import('./pages/admin/Dashboard.jsx'));
+const AdminIncidents = lazy(() => import('./pages/admin/Incidents.jsx'));
+const AdminVPNHealth = lazy(() => import('./pages/admin/VPNHealth.jsx'));
+const AdminTopology = lazy(() => import('./pages/admin/Topology.jsx'));
+const AdminDiagnostics = lazy(() => import('./pages/admin/Diagnostics.jsx'));
+const AdminAssistant = lazy(() => import('./pages/admin/Assistant.jsx'));
+
+// ICT officer pages
+const OfficerDashboard = lazy(() => import('./pages/ict_officer/Dashboard.jsx'));
+const OfficerIncidents = lazy(() => import('./pages/ict_officer/ReportIssue.jsx'));
+const OfficerTopology = lazy(() => import('./pages/ict_officer/MyTickects.jsx'));
+const OfficerDiagnostics = lazy(() => import('./pages/ict_officer/Diagnostics.jsx'));
+const OfficerAssistant = lazy(() => import('./pages/ict_officer/Assistant.jsx'));
+
+
+
+// Reports page is not present at ./pages/Reports.jsx in this repo.
+// If/when added, wire it into the /pages/admin/* and /pages/ict_officer/* routes.
+
 
 //Wraps routes and checks for authentication
-function ProtectedRoute({ children }) {
+function ProtectedRoute({ children, requiredRole }) {
   const token = useAppStore((state) => state.token);
+  const user = useAppStore((state) => state.user);
+  const role = user?.role;
+
   if (!token) return <Navigate to="/login" replace />;
+
+  // If a specific role is required and the user's role doesn't match, redirect them to the correct role dashboard
+  if (requiredRole && role !== requiredRole) {
+    const home = role === 'admin' ? '/pages/admin/dashboard' : '/pages/ict_officer/dashboard';
+    return <Navigate to={home} replace />;
+  }
+
   return children;
 }
+
+function NotFoundRedirect() {
+  return <Navigate to="/" replace />;
+}
+
+
 
 function AppLayout({ children }) {
   return (
@@ -52,23 +81,46 @@ export default function App() {
         <Route path="/login" element={<Login />} />
 
         {/* Protected */}
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
-        {[
-          { path: '/dashboard',   element: <Dashboard /> },
-          { path: '/incidents',   element: <Incidents /> },
-          { path: '/vpn-health',  element: <VPNHealth /> },
-          { path: '/topology',    element: <Topology /> },
-          { path: '/diagnostics', element: <Diagnostics /> },
-          { path: '/assistant',   element: <Assistant /> },
-          { path: '/reports',     element: <Reports /> },
-        ].map(({ path, element }) => (
-          <Route key={path} path={path} element={
-            <ProtectedRoute>
-              <AppLayout>{element}</AppLayout>
-            </ProtectedRoute>
-          } />
+        <Route path="/" element={<Navigate to="/login" replace />} />
+        {/**
+         * Role-based guard to prevent a logged-in user from staying on the wrong role routes.
+         * Example: ict_officer should not remain on /pages/admin/*.
+         */}
+
+
+        {/* Protected role-based routes */}
+        {(
+          [
+            { path: '/pages/admin/dashboard',   element: <AdminDashboard />, role: 'admin' },
+            { path: '/pages/admin/incidents',   element: <AdminIncidents />, role: 'admin' },
+            { path: '/pages/admin/vpn-health',  element: <AdminVPNHealth />, role: 'admin' },
+            { path: '/pages/admin/topology',    element: <AdminTopology />, role: 'admin' },
+            { path: '/pages/admin/diagnostics', element: <AdminDiagnostics />, role: 'admin' },
+            { path: '/pages/admin/assistant',   element: <AdminAssistant />, role: 'admin' },
+
+            { path: '/pages/ict_officer/dashboard',   element: <OfficerDashboard />, role: 'ict_officer' },
+            { path: '/pages/ict_officer/incidents',   element: <OfficerIncidents />, role: 'ict_officer' },
+
+            { path: '/pages/ict_officer/topology',    element: <OfficerTopology />, role: 'ict_officer' },
+            { path: '/pages/ict_officer/diagnostics', element: <OfficerDiagnostics />, role: 'ict_officer' },
+            { path: '/pages/ict_officer/assistant',   element: <OfficerAssistant />, role: 'ict_officer' },
+          ]
+        ).map(({ path, element, role }) => (
+          <Route
+            key={path}
+            path={path}
+            element={
+              <ProtectedRoute requiredRole={role}>
+                <AppLayout>{element}</AppLayout>
+              </ProtectedRoute>
+            }
+          />
         ))}
+
+        {/* Catch-all */}
+        <Route path="*" element={<NotFoundRedirect />} />
       </Routes>
     </BrowserRouter>
   );
+
 }

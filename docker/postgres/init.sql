@@ -3,7 +3,34 @@
 -- Runs automatically when Postgres container starts for the first time
 -- ─────────────────────────────────────────────────────────────────────────────
 
--- ── Users ─────────────────────────────────────────────────────────────────────
+-- ── Users (DB role + app users) ─────────────────────────────────────────────
+
+-- Ensure the application role exists.
+-- This fixes errors like: role "kra_user" does not exist
+-- Re-create critical built-in role if it's missing (some previous init runs
+-- can leave the cluster in a weird state when custom scripts are used).
+-- We also create/align kra_user.
+DO $$
+BEGIN
+  -- Ensure default superuser role exists.
+  IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'postgres') THEN
+    CREATE ROLE postgres WITH LOGIN SUPERUSER PASSWORD 'secret';
+  ELSE
+    -- No-op: password is irrelevant for our app usage.
+    NULL;
+  END IF;
+
+  -- Ensure the application role exists.
+  IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'kra_user') THEN
+    CREATE ROLE kra_user LOGIN PASSWORD 'secret';
+  ELSE
+    -- Keep password in sync with docker-compose default.
+    ALTER ROLE kra_user WITH LOGIN PASSWORD 'secret';
+  END IF;
+END $$;
+
+
+-- Create schema objects.
 CREATE TABLE IF NOT EXISTS users (
   id           SERIAL PRIMARY KEY,
   name         VARCHAR(100) NOT NULL,
@@ -12,6 +39,7 @@ CREATE TABLE IF NOT EXISTS users (
   role         VARCHAR(20) DEFAULT 'ict_officer',  -- ict_officer | admin
   created_at   TIMESTAMPTZ DEFAULT NOW()
 );
+
 
 -- ── Incidents ─────────────────────────────────────────────────────────────────
 CREATE TABLE IF NOT EXISTS incidents (

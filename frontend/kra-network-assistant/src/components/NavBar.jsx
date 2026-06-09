@@ -2,20 +2,34 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import useAppStore from '../store/appStore';
 import { KRALogo } from './index.jsx';
 
-const NAV_ITEMS = [
-  { path: '/dashboard',   label: 'Dashboard',     icon: '▦' },
-  { path: '/incidents',   label: 'Incidents',      icon: '⚠',  badge: true },
-  { path: '/vpn-health',  label: 'VPN Health',     icon: '⬡' },
-  { path: '/topology',    label: 'Topology',       icon: '◈' },
-  { path: '/diagnostics', label: 'Diagnostics',    icon: '⊙' },
-  { path: '/assistant',   label: 'AI Assistant',   icon: '✦' },
-  { path: '/reports',     label: 'Reports',        icon: '≡' },
+const ADMIN_NAV_ITEMS = [
+  { key: 'dashboard',   label: 'Dashboard',     icon: '▦' },
+  { key: 'incidents',   label: 'Incidents',     icon: '⚠',  badge: true },
+  { key: 'topology',    label: 'Topology',      icon: '◈' },
+  { key: 'diagnostics', label: 'Diagnostics',   icon: '⊙' },
+  { key: 'assistant',   label: 'AI Assistant',  icon: '✦' },
+  { key: 'reports',     label: 'Reports',      icon: '≡' },
+];
+
+const OFFICER_NAV_ITEMS = [
+  { key: 'dashboard',   label: 'Service Status',     icon: '▦' },
+  { key: 'incidents',   label: 'Report an Issue',    icon: '⚠',  badge: true },
+  { key: 'topology',    label: 'My Tickets',         icon: '◈' },
+  { key: 'diagnostics', label: 'Diagnostics',        icon: '⊙' },
+  { key: 'assistant',   label: 'AI Assistant',       icon: '✦' },
 ];
 
 export default function NavBar() {
   const navigate   = useNavigate();
   const location   = useLocation();
   const { user, incidents, logout } = useAppStore();
+
+  // role-derived navigation base
+  const role = user?.role || 'ict_officer';
+  const NAV_ITEMS = role === 'admin' ? ADMIN_NAV_ITEMS : OFFICER_NAV_ITEMS;
+
+
+
 
   const criticalCount = incidents.filter(i => i.severity === 'critical' && i.status === 'Open').length;
   const now = new Date().toLocaleString('en-KE', { dateStyle: 'medium', timeStyle: 'short' });
@@ -27,6 +41,8 @@ export default function NavBar() {
 
   return (
     <>
+      {/* Debug: comment out in production */}
+      {/* <div style={{display:'none'}}>role:{user?.role} path:{location.pathname}</div> */}
       {/* ── Utility bar ── */}
       <div style={{
         background: '#003D22', padding: '0 24px',
@@ -111,11 +127,15 @@ export default function NavBar() {
         boxShadow: '0 2px 4px rgba(0,50,25,0.15)',
       }}>
         {NAV_ITEMS.map(n => {
-          const active = location.pathname === n.path;
+          const base = (user?.role === 'admin') ? '/pages/admin' : '/pages/ict_officer';
+          const routeKey = n.key === 'assistant' ? 'assistant' : n.key;
+          const pageKey = (routeKey === 'vpn-health') ? 'vpn-health' : routeKey;
+          const pathForRole = `${base}/${pageKey === 'dashboard' ? 'dashboard' : pageKey}`;
+          const active = location.pathname === pathForRole;
           return (
             <button
-              key={n.path}
-              onClick={() => navigate(n.path)}
+              key={n.key}
+              onClick={() => navigate(pathForRole)}
               style={{
                 padding: '0 18px', background: active ? '#003D22' : 'transparent',
                 border: 'none', borderBottom: active ? '3px solid #C8922A' : '3px solid transparent',

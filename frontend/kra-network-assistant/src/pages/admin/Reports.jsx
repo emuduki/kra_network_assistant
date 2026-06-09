@@ -1,4 +1,4 @@
-import { PageHeader } from "../components/index.jsx";
+import { PageHeader } from "../../components/index.jsx";
 
 export default function Reports() {
     return (

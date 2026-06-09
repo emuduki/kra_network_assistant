@@ -17,9 +17,24 @@ export default function Login() {
     setError('');
     setLoading(true);
     try {
+      // Clear any previous session first (prevents role flash if localStorage has stale data)
+      localStorage.removeItem('kra_user');
+      localStorage.removeItem('kra_token');
+
       const { token, user } = await authService.login(email, password);
       login(user, token);
-      navigate('/dashboard');
+
+      console.log('Logged in as:', user?.role, '| Full user object:', user);
+      console.log('Store state:', useAppStore.getState());
+
+      const role = user?.role;
+      if (role === 'admin') {
+        navigate('/pages/admin/dashboard');
+      } else if (role === 'ict_officer') {
+        navigate('/pages/ict_officer/dashboard');
+      } else {
+        navigate('/login');
+      }
     } catch (err) {
       const responseData = err.response?.data;
       const isNetworkError = err.isNetworkError || err.message?.includes('Failed to fetch') || err.message?.includes('NetworkError');

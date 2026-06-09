@@ -7,7 +7,7 @@ module.exports = {
     nodeEnv: process.env.NODE_ENV || 'development',
 
     db: {
-        host: process.env.DB_HOST || 'localhost',
+        host: process.env.DB_HOST || 'db',
         port: parseInt(process.env.DB_PORT || '5432'),
         database: process.env.DB_NAME || 'kra_network',
         user: process.env.DB_USER || 'kra_user',

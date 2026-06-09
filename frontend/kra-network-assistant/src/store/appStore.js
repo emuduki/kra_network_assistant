@@ -11,11 +11,11 @@ login: (user, token) => {
     set({ user, token });
 },
 
-logout: () => {
+  logout: () => {
     localStorage.removeItem('kra_user');
     localStorage.removeItem('kra_token');
     set({ user: null, token: null, incidents: [], tunnels: [] });
-},
+  },
 
 // Incidents
 incidents: [],
