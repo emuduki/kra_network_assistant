@@ -12,6 +12,7 @@ const incidentRoutes = require('./routes/incidents.routes');
 const tunnelRoutes = require('./routes/tunnels.routes');
 const logsRoutes = require('./routes/logs.routes');
 const aiRoutes = require('./routes/ai.routes');
+const usersRoutes = require('./routes/users.routes');
 
 const app = express();
 
@@ -47,6 +48,7 @@ app.get('/health', (req, res) => {
 
 // API routes
 app.use('/api/auth', authRoutes);
+app.use('/api/users',  usersRoutes);
 app.use('/api/incidents', incidentRoutes);
 app.use('/api/tunnels', tunnelRoutes);
 app.use('/api/logs', logsRoutes);

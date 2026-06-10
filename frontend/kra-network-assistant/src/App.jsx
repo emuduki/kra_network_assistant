@@ -8,6 +8,7 @@ import { lazy, Suspense } from 'react';
 // Admin pages
 const AdminDashboard = lazy(() => import('./pages/admin/Dashboard.jsx'));
 const AdminIncidents = lazy(() => import('./pages/admin/Incidents.jsx'));
+const AdminReports = lazy(() => import('./pages/admin/Reports.jsx'));
 const AdminVPNHealth = lazy(() => import('./pages/admin/VPNHealth.jsx'));
 const AdminTopology = lazy(() => import('./pages/admin/Topology.jsx'));
 const AdminDiagnostics = lazy(() => import('./pages/admin/Diagnostics.jsx'));
@@ -93,6 +94,7 @@ export default function App() {
           [
             { path: '/pages/admin/dashboard',   element: <AdminDashboard />, role: 'admin' },
             { path: '/pages/admin/incidents',   element: <AdminIncidents />, role: 'admin' },
+            { path: '/pages/admin/reports',    element: <AdminReports />, role: 'admin' },
             { path: '/pages/admin/vpn-health',  element: <AdminVPNHealth />, role: 'admin' },
             { path: '/pages/admin/topology',    element: <AdminTopology />, role: 'admin' },
             { path: '/pages/admin/diagnostics', element: <AdminDiagnostics />, role: 'admin' },

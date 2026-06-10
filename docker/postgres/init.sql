@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS users (
   email        VARCHAR(150) UNIQUE NOT NULL,
   password_hash TEXT NOT NULL,
   role         VARCHAR(20) DEFAULT 'ict_officer',  -- ict_officer | admin
+  is_active    BOOLEAN DEFAULT true,
   created_at   TIMESTAMPTZ DEFAULT NOW()
 );
 
@@ -44,6 +45,7 @@ CREATE TABLE IF NOT EXISTS users (
 -- ── Incidents ─────────────────────────────────────────────────────────────────
 CREATE TABLE IF NOT EXISTS incidents (
   id           SERIAL PRIMARY KEY,
+  tunnel_id    INTEGER REFERENCES tunnels(id),
   incident_ref VARCHAR(20) UNIQUE,          -- e.g. INC-2026-047
   severity     VARCHAR(20) NOT NULL,        -- critical | warning | info
   service      VARCHAR(100) NOT NULL,

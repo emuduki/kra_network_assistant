@@ -1,7 +1,7 @@
-const Anthropic = require('@anthropic-ai/sdk');
+const Groq = require('groq-sdk');
 const config = require('../config');
 
-const client = new Anthropic({ apiKey: config.anthropic.apiKey });
+const client = config.groq.apiKey ? new Groq({ apiKey: config.groq.apiKey }) : null;
 
 const KRA_SYSTEM_CONTEXT = `You are an expert network and VPN security engineer for the Kenya Revenue Authority (KRA).
 KRA operates critical systems including iTax (tax filing), iCMS (customs), staff email, and payroll — all accessed via IPSec/IKEv2 VPN tunnels.
@@ -23,6 +23,9 @@ When responding:
 // Log Analyzer
 // Send raw log text to Claude and ask for a diagnosis and recommended commands to fix the issue.
 async function analyzeLog(logText, traceroute = '') {
+    if (!client) {
+        throw new Error('Groq API key not configured. Set GROQ_API_KEY in .env');
+    }
     const prompt = [
       'Analyze this KRA network log and traceroute.',
       '',
@@ -32,7 +35,7 @@ async function analyzeLog(logText, traceroute = '') {
     ].join('\n');
 
     const response = await client.messages.create({
-        model: 'claude-sonnet-4-20250514',
+        model: 'llama-3.3-70b-versatile',
         max_tokens: 1500,
         system: `${KRA_SYSTEM_CONTEXT}
 
@@ -54,7 +57,7 @@ Return ONLY valid JSON in exactly this shape (no markdown, no extra text):
         messages: [{ role: 'user', content: prompt }],
     });
 
-    const raw = response.context[0].text;
+    const raw = response.choices[0].message.content;
     // Strip any accidental markdown code blocks
     const clean = raw.replace(/```json|```/g, '').trim();
     return JSON.parse(clean);
@@ -63,18 +66,21 @@ Return ONLY valid JSON in exactly this shape (no markdown, no extra text):
 // Chat Assistant
 // Conversational assistant that knows the current incident context and can answer follow-up questions about the issue and recommended fixes.
 async function chatWithAssistant(messages, activIncidentContext = '') {
+    if (!client) {
+        throw new Error('Groq API key not configured. Set GROQ_API_KEY in .env');
+    }
     const systemPrompt = activIncidentContext
         ? `${KRA_SYSTEM_CONTEXT}\n\nCurrent Incident Context:\n${activIncidentContext}`
         : KRA_SYSTEM_CONTEXT;
 
     const response = await client.messages.create({
-        model: 'claude-sonnet-4-20250514',
+        model: 'llama-3.3-70b-versatile',
         max_tokens: 1000,
         system: systemPrompt,
         messages: messages.map(m => ({ role: m.role, content: m.content })),
     });
 
-    return response.context[0].text;
+    return response.choices[0].message.content;
 }
 
 module.exports = { analyzeLog, chatWithAssistant };

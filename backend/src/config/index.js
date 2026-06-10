@@ -21,8 +21,8 @@ module.exports = {
         expiresIn: process.env.JWT_EXPIRES_IN || '1h',
     },
 
-    anthropic: {
-        apiKey: process.env.ANTHROPIC_API_KEY || '',
+    groq: {
+        apiKey: process.env.GROQ_API_KEY || '',
     },
 
     cors: {
