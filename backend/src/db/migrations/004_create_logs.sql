@@ -1,4 +1,4 @@
-CREATE TABLE log_entries (
+CREATE TABLE IF NOT EXISTS log_entries (
   id SERIAL PRIMARY KEY,
   raw_log TEXT,
   analysis JSONB, -- AI-parsed result

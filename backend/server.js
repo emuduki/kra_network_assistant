@@ -1,6 +1,6 @@
 //entry point, starts the server on port 4000
 
-const { execSync } = require('child_process');
+const { spawn } = require('child_process');
 const app = require('./src/app');
 const config = require('./src/config');
 
@@ -11,22 +11,61 @@ require('./src/db/pool');
 const { startTunnelMonitor } = require('./src/services/tunnelMonitor');
 
 function runMigrationsOnBoot() {
-    console.log('\n[DB] Running startup migrations...');
-    execSync('node src/db/migrate.js', { stdio: 'inherit' });
-    console.log('[DB] Startup migrations complete.\n');
+    return new Promise((resolve, reject) => {
+        console.log('\n[DB] Running startup migrations...');
+        
+        // Spawn migrations as a child process so server can start immediately
+        const migrate = spawn('node', ['src/db/migrate.js'], { 
+            stdio: 'inherit',
+            detached: false 
+        });
+
+        migrate.on('close', (code) => {
+            if (code === 0) {
+                console.log('[DB] ✓ Startup migrations complete.\n');
+                resolve();
+            } else {
+                console.error('[DB] ✗ Migration failed with code', code);
+                reject(new Error(`Migration exited with code ${code}`));
+            }
+        });
+
+        migrate.on('error', (err) => {
+            console.error('[DB] ✗ Migration error:', err.message);
+            reject(err);
+        });
+    });
 }
 
-runMigrationsOnBoot();
-
-app.listen(config.port, () => {
+app.listen(config.port, '0.0.0.0', () => {
     console.log(`\n KRA Network Assistant API running`);
     console.log(`   Port:        ${config.port}`);
     console.log(`   Environment: ${config.nodeEnv}`);
     console.log(`   Health:      http://localhost:${config.port}/health\n`);
 
-    // Start tunnel monitor after server is up
+    // Run migrations, THEN start tunnel monitor (must wait for tables to exist)
     if (config.nodeEnv !== 'test') {
-        startTunnelMonitor();
+        runMigrationsOnBoot()
+            .then(() => {
+                console.log('[TUNNEL] Starting tunnel monitor...\n');
+                startTunnelMonitor();
+            })
+            .catch((err) => {
+                console.error('[STARTUP] Failed to initialize:', err.message);
+                console.error('[STARTUP] Tunnel monitor will retry when migrations complete.\n');
+                // Retry migrations every 10 seconds
+                setInterval(() => {
+                    console.log('[RETRY] Attempting migrations again...');
+                    runMigrationsOnBoot()
+                        .then(() => {
+                            console.log('[TUNNEL] Starting tunnel monitor...\n');
+                            startTunnelMonitor();
+                        })
+                        .catch((err) => {
+                            console.error('[RETRY] Migrations failed again:', err.message);
+                        });
+                }, 10000);
+            });
     }
 });
 

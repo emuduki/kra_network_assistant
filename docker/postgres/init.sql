@@ -42,6 +42,19 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 
+-- ── VPN Tunnels ───────────────────────────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS tunnels (
+  id           SERIAL PRIMARY KEY,
+  name         VARCHAR(100) NOT NULL,
+  tunnel_ref   VARCHAR(20) UNIQUE,          -- VPN-001
+  peer_ip      VARCHAR(45),
+  status       VARCHAR(20) DEFAULT 'unknown', -- up | down | degraded
+  latency_ms   INTEGER,
+  uptime_pct   DECIMAL(5,2),
+  last_checked TIMESTAMPTZ DEFAULT NOW()
+);
+
+
 -- ── Incidents ─────────────────────────────────────────────────────────────────
 CREATE TABLE IF NOT EXISTS incidents (
   id           SERIAL PRIMARY KEY,
@@ -55,18 +68,6 @@ CREATE TABLE IF NOT EXISTS incidents (
   ai_diagnosis JSONB,                       -- full structured AI response
   created_at   TIMESTAMPTZ DEFAULT NOW(),
   resolved_at  TIMESTAMPTZ
-);
-
--- ── VPN Tunnels ───────────────────────────────────────────────────────────────
-CREATE TABLE IF NOT EXISTS tunnels (
-  id           SERIAL PRIMARY KEY,
-  name         VARCHAR(100) NOT NULL,
-  tunnel_ref   VARCHAR(20) UNIQUE,          -- VPN-001
-  peer_ip      VARCHAR(45),
-  status       VARCHAR(20) DEFAULT 'unknown', -- up | down | degraded
-  latency_ms   INTEGER,
-  uptime_pct   DECIMAL(5,2),
-  last_checked TIMESTAMPTZ DEFAULT NOW()
 );
 
 -- ── Log Entries ───────────────────────────────────────────────────────────────
