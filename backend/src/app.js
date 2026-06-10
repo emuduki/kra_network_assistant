@@ -20,11 +20,14 @@ const allowedOrigins = config.cors.origins;
 const isLocalhostOrigin = (origin) => {
   return /^https?:\/\/(localhost|127\.0\.0\.1|\[::1\])(?::\d+)?$/.test(origin);
 };
+const isVercelOrigin = (origin) => {
+  return /^https:\/\/.*\.vercel\.app$/.test(origin);
+};
 
 // Global middleware
 app.use(cors({
     origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin) || isLocalhostOrigin(origin)) {
+      if (!origin || allowedOrigins.includes(origin) || isLocalhostOrigin(origin) || isVercelOrigin(origin)) {
         return callback(null, true);
       }
       return callback(new Error(`CORS origin not allowed: ${origin}`));
