@@ -27,3 +27,10 @@ app.listen(config.port, () => {
     console.log(`   Health:      http://localhost:${config.port}/health\n`);
 
     runMigrationsOnBoot();
+
+    // Start tunnel monitor after server is up
+    if (config.nodeEnv !== 'test') {
+        startTunnelMonitor();
+    }
+});
+
