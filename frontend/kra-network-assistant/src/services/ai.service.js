@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:4000',
+    baseURL: process.env.REACT_APP_API_URL || 'http://localhost:4000',
     timeout: 30000, // 30s — AI calls can be slow
 });
 
