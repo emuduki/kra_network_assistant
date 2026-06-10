@@ -1,0 +1,20 @@
+services:
+  - type: web_service
+    name: kra-network-assistant-backend
+    env: node
+    plan: starter
+    root: backend
+    branch: main
+    buildCommand: npm install
+    startCommand: npm start
+
+# If you want Render to provision a managed Postgres database for the backend,
+# uncomment the following section and remove DB_HOST/DB_PORT/DB_USER/DB_PASSWORD
+# from your Render service environment variables.
+#
+# databases:
+#   - name: kra-network-assistant-db
+#     databaseName: kra_network
+#     engine: postgresql
+#     version: 15
+#     plan: starter
