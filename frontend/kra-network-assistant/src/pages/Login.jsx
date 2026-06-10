@@ -39,7 +39,7 @@ export default function Login() {
       const responseData = err.response?.data;
       const isNetworkError = err.isNetworkError || err.message?.includes('Failed to fetch') || err.message?.includes('NetworkError');
       const fallbackMessage = isNetworkError
-        ? 'Cannot reach the backend. Ensure backend is running at http://localhost:4000 and that CORS is allowed.'
+        ? `Cannot reach the backend. Ensure backend is running at ${err.response?.url || 'http://localhost:4000'} and that CORS is allowed.`
         : responseData?.error || responseData?.message || err.message || 'Login failed. Please try again.';
       const statusInfo = err.response?.status ? ` (${err.response.status} ${err.response.statusText || ''})` : '';
       setError(`${fallbackMessage}${statusInfo}`.trim());
