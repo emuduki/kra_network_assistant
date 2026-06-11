@@ -21,7 +21,7 @@ export default function VPNHealth() {
     try { setTunnels(await tunnelsService.getAll()); }
     catch (e) { console.error(e); }
     finally { setTunnelsLoading(false); }
-  }, []);
+  }, [setTunnels, setTunnelsLoading]);
 
   useEffect(() => {
     fetchTunnels();

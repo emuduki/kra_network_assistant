@@ -19,7 +19,6 @@ const SUGGESTIONS = [
 
 function Message({ msg }) {
   const isUser = msg.role === 'user';
-  const hasCode = msg.content.includes('```') || msg.content.includes('ipsec') || msg.content.includes('sudo') || msg.content.includes('/etc');
 
   // Parse markdown code blocks
   const parts = msg.content.split(/(```[\s\S]*?```)/g);
@@ -80,6 +79,7 @@ export default function Assistant() {
       sendMessage(location.state.prompt);
       window.history.replaceState({}, '');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

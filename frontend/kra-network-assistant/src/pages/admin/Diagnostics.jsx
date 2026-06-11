@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import useAppStore from '../../store/appStore.js';
 import { aiService, incidentsService } from '../../services/index.js';
 import { Badge, Card, CardHeader, PageHeader } from '../../components/index.jsx';
@@ -66,7 +66,6 @@ export default function Diagnostics() {
   const [loading,    setLoading]    = useState(false);
   const [result,     setResult]     = useState(null);
   const [error,      setError]      = useState('');
-  const [creating,   setCreating]   = useState(null);
   const [created,    setCreated]    = useState([]);
 
   async function analyze() {
@@ -81,7 +80,6 @@ export default function Diagnostics() {
   }
 
   async function createIncident(issue) {
-    setCreating(issue.type);
     try {
       const sevMap = { VPN_TUNNEL_DOWN: 'critical', CERT_EXPIRY: 'warning', DNS_FAILURE: 'critical', FIREWALL_BLOCK: 'warning', DPD_FAILURE: 'critical', MTU_MISMATCH: 'info', PACKET_LOSS: 'warning', ROUTING_ISSUE: 'warning' };
       const inc = await incidentsService.create({
@@ -94,7 +92,6 @@ export default function Diagnostics() {
       setIncidents([inc, ...incidents]);
       setCreated(prev => [...prev, issue.type]);
     } catch (e) { console.error(e); }
-    finally { setCreating(null); }
   }
 
   const taStyle = {

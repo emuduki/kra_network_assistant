@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import useAppStore from '../../store/appStore.js';
-import { incidentsService } from '../../services/index.js';
-import { Card, CardHeader, PageHeader, Badge } from '../../components/index.jsx';
+import { Card, PageHeader, Badge } from '../../components/index.jsx';
 
 function ReportCard({ icon, title, desc, period, tag, onGenerate, loading }) {
   return (
@@ -32,7 +31,6 @@ function ReportCard({ icon, title, desc, period, tag, onGenerate, loading }) {
 
 export default function Reports() {
   const { incidents, tunnels, user } = useAppStore();
-  const [activeReport, setActiveReport] = useState(null);
   const [generating,   setGenerating]   = useState(null);
   const [reportData,   setReportData]   = useState(null);
 
@@ -40,7 +38,6 @@ export default function Reports() {
 
   async function generateReport(type) {
     setGenerating(type);
-    setActiveReport(type);
     // Simulate generation delay
     await new Promise(r => setTimeout(r, 800));
     setReportData(buildReport(type));

@@ -101,6 +101,7 @@ export default function Topology() {
       setTunnelsLoading(true);
       tunnelsService.getAll().then(setTunnels).catch(console.error).finally(() => setTunnelsLoading(false));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

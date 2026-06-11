@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import useAppStore from '../../store/appStore.js';
 import { incidentsService } from '../../services/index.js';
 import { Badge, Card, CardHeader, PageHeader, LoadingSpinner } from '../../components/index.jsx';
@@ -30,6 +29,7 @@ export default function Incidents() {
 
   useEffect(() => {
     fetchIncidents();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // If navigated here with a selected incident, scroll to it
