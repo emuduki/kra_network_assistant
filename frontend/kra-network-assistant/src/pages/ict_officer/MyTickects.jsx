@@ -27,7 +27,7 @@ function StatusPill({ status }) {
     "In Progress": { bg: T.warningLight,  color: T.warning  },
     "Open":        { bg: "#FFEBEE",        color: "#C62828"  },
     "Scheduled":   { bg: T.infoLight,     color: T.info     },
-    "Resolved":    { bg: T.kraGreenLight, color: T.kraGreen },
+    "Resolved":    { bg: T.successLight, color: T.success },
   };
   const c = cfg[status] || { bg: T.surfaceAlt, color: T.textMuted };
   return (
@@ -57,7 +57,7 @@ export default function MyTickets({ onNavigate }) {
       <div style={{ display: "flex", gap: 10, marginBottom: 20, flexWrap: "wrap" }}>
         {[
           { label: `${openCount} Open`,      color: T.warning,  bg: T.warningLight  },
-          { label: `${resolvedCount} Resolved`, color: T.kraGreen, bg: T.kraGreenLight },
+          { label: `${resolvedCount} Resolved`, color: T.success, bg: T.successLight },
         ].map((c, i) => (
           <div key={i} style={{
             padding: "5px 16px", borderRadius: 20, fontSize: 12,

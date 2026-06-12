@@ -260,9 +260,9 @@ export default function Incidents() {
               <button key={s} onClick={() => setFilterSeverity(s)} style={{
                 padding: '5px 12px', borderRadius: 2, fontSize: 11, fontWeight: 600,
                 cursor: 'pointer', fontFamily: 'inherit', border: '1px solid',
-                background: filterSeverity === s ? '#1A1A1A' : '#F5F7F5',
+                background: filterSeverity === s ? '#C8102E' : '#F5F7F5',
                 color: filterSeverity === s ? 'white' : '#6B7C72',
-                borderColor: filterSeverity === s ? '#1A1A1A' : '#D8DFE6',
+                borderColor: filterSeverity === s ? '#C8102E' : '#D8DFE6',
               }}>{s === 'All' ? 'All Severity' : s.charAt(0).toUpperCase() + s.slice(1)}</button>
             ))}
           </div>
@@ -284,9 +284,9 @@ export default function Incidents() {
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
-                <tr style={{ background: '#1A1A1A' }}>
+                <tr style={{ background: '#F5F5F5' }}>
                   {['Incident ID', 'Severity', 'Service', 'Description', 'Assigned To', 'Status', 'Time', 'Actions'].map(h => (
-                    <th key={h} style={{ padding: '9px 14px', textAlign: 'left', fontSize: 10.5, fontWeight: 600, color: '#CCCCCC', letterSpacing: 0.5, textTransform: 'uppercase', borderBottom: '2px solid #C8102E', whiteSpace: 'nowrap' }}>{h}</th>
+                    <th key={h} style={{ padding: '9px 14px', textAlign: 'left', fontSize: 10.5, fontWeight: 600, color: '#C8102E', letterSpacing: 0.5, textTransform: 'uppercase', borderBottom: '2px solid #C8102E', whiteSpace: 'nowrap' }}>{h}</th>
                   ))}
                 </tr>
               </thead>

@@ -73,9 +73,9 @@ export default function VPNHealth() {
         {tunnelsLoading && tunnels.length === 0 ? <LoadingSpinner message="Loading tunnels..." /> : (
           <div>
             {/* Header row */}
-            <div style={{ display: 'grid', gridTemplateColumns: '14px 1.4fr 1.2fr 100px 90px 90px 110px 110px', gap: 0, padding: '9px 18px', background: '#1A1A1A', borderBottom: '2px solid #C8102E' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '14px 1.4fr 1.2fr 100px 90px 90px 110px 110px', gap: 0, padding: '9px 18px', background: '#F5F5F5', borderBottom: '2px solid #C8102E' }}>
               {['', 'Tunnel Name', 'Peer IP / Ref', 'Status', 'Latency', 'Uptime', 'Last Check', 'Action'].map((h, i) => (
-                <div key={i} style={{ fontSize: 10, color: '#CCCCCC', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5, padding: '0 6px' }}>{h}</div>
+                <div key={i} style={{ fontSize: 10, color: '#C8102E', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5, padding: '0 6px' }}>{h}</div>
               ))}
             </div>
             {tunnels.length === 0 ? (

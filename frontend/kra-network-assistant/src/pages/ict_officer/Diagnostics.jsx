@@ -12,7 +12,7 @@ function Card({ children, style }) {
 
 // ── Result icon + colour ──────────────────────────────────────────────────────
 function resultColor(s) {
-  if (s === "pass") return T.kraGreen;
+  if (s === "pass") return T.success;
   if (s === "warn") return T.warning;
   return "#C62828";
 }
@@ -164,14 +164,14 @@ export default function Connection() {
                 background: T.border, borderRadius: 4, height: 5, overflow: "hidden",
               }}>
                 <div style={{
-                  background: T.kraGreen, height: "100%",
+                  background: T.success, height: "100%",
                   width: `${progress}%`, borderRadius: 4,
                   transition: "width .4s ease",
                 }} />
               </div>
               {ranCount > 0 && (
                 <div style={{ display: "flex", gap: 12, marginTop: 8, flexWrap: "wrap" }}>
-                  {passCount > 0 && <span style={{ fontSize: 11, color: T.kraGreen, fontWeight: 600 }}>✓ {passCount} passed</span>}
+                  {passCount > 0 && <span style={{ fontSize: 11, color: T.success, fontWeight: 600 }}>✓ {passCount} passed</span>}
                   {warnCount > 0 && <span style={{ fontSize: 11, color: T.warning,  fontWeight: 600 }}>⚠ {warnCount} warning</span>}
                   {failCount > 0 && <span style={{ fontSize: 11, color: T.danger,   fontWeight: 600 }}>✕ {failCount} failed</span>}
                 </div>
@@ -194,13 +194,14 @@ export default function Connection() {
           {/* Summary message after completion */}
           {!running && ranCount === DIAG_CHECKS.length && (
             <div style={{
-              marginTop: 16, padding: "12px 16px", borderRadius: 8,
-              background: failCount > 0 ? T.dangerLight : warnCount > 0 ? T.warningLight : T.kraGreenLight,
-              border: `1px solid ${failCount > 0 ? "#C62828" : warnCount > 0 ? T.warning : T.kraGreen}30`,
+              marginTop: 16, padding: "10px 14px", borderRadius: 6,
+              background: failCount > 0 ? T.dangerLight : warnCount > 0 ? T.warningLight : T.successLight,
+              border: `1px solid ${failCount > 0 ? "#C62828" : warnCount > 0 ? T.warning : T.success}30`,
+              display: "flex", alignItems: "flex-start", gap: 10,
             }}>
               <div style={{
                 fontSize: 13, fontWeight: 600,
-                color: failCount > 0 ? "#C62828" : warnCount > 0 ? T.warning : T.kraGreen,
+                color: failCount > 0 ? "#C62828" : warnCount > 0 ? T.warning : T.success,
               }}>
                 {failCount > 0
                   ? `${failCount} check${failCount > 1 ? "s" : ""} failed — network issues detected`
@@ -244,14 +245,14 @@ export default function Connection() {
           </Card>
 
           <Card style={{
-            padding: "16px 18px",
-            background: T.kraGreenLight,
-            border: `1px solid ${T.kraGreen}30`,
+            background: T.successLight,
+            border: `1px solid ${T.success}30`,
+            borderRadius: 8, padding: 20, textAlign: "center",
           }}>
-            <div style={{ fontSize: 13, fontWeight: 700, color: T.kraGreenDark, marginBottom: 8 }}>
-              💡 Tip
+            <div style={{ fontSize: 13, fontWeight: 700, color: T.success, marginBottom: 8 }}>
+              No Issues Detected
             </div>
-            <div style={{ fontSize: 12, color: T.kraGreenDark, lineHeight: 1.7 }}>
+            <div style={{ fontSize: 12, color: T.success, lineHeight: 1.7 }}>
               After running the check, share the results with the ICT Help Desk on ext. 4444 — it
               helps them fix your issue much faster.
             </div>

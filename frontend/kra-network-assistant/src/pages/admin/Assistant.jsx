@@ -48,7 +48,7 @@ function Message({ msg }) {
         })}
       </div>
       {isUser && (
-        <div style={{ width: 32, height: 32, borderRadius: 3, background: '#1A1A1A', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#CCCCCC', fontSize: 11, fontWeight: 700, flexShrink: 0, marginTop: 2 }}>
+        <div style={{ width: 32, height: 32, borderRadius: 3, background: '#F0F0F0', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#666666', fontSize: 11, fontWeight: 700, flexShrink: 0, marginTop: 2, border: '1px solid #D8DFE6' }}>
           You
         </div>
       )}

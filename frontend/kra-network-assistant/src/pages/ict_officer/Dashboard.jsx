@@ -58,7 +58,7 @@ export default function Dashboard({ onNavigate }) {
       {/* Summary chips */}
       <div style={{ display: "flex", gap: 10, marginBottom: 24, flexWrap: "wrap" }}>
         {[
-          { label: `${upCount} Operational`,  color: T.kraGreen, bg: T.kraGreenLight },
+          { label: `${upCount} Operational`,  color: T.success, bg: T.successLight },
           { label: `${degradedCount} Degraded`, color: T.warning,  bg: T.warningLight  },
           { label: `${downCount} Disrupted`,   color: T.danger,   bg: T.dangerLight   },
         ].map((c, i) => (
@@ -121,7 +121,7 @@ export default function Dashboard({ onNavigate }) {
           {ANNOUNCEMENTS.map((a, i) => (
             <Card key={i} style={{
               padding: "14px 18px",
-              borderLeft: `3px solid ${a.type === "warning" ? T.warning : a.type === "success" ? T.kraGreen : T.info}`,
+              borderLeft: `3px solid ${a.type === "warning" ? T.warning : a.type === "success" ? T.success : T.info}`,
             }}>
               <div style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
                 <span style={{ fontSize: 16 }}>

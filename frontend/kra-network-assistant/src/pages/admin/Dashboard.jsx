@@ -209,22 +209,23 @@ export default function Dashboard() {
       {/* ── ICT Officer: My work summary strip ── */}
       {!isAdmin && (
         <div style={{
-          background: '#1A1A1A', borderRadius: 3, padding: '12px 20px',
+          background: '#F5F5F5', borderRadius: 3, padding: '12px 20px',
           marginBottom: 18, display: 'flex', alignItems: 'center', gap: 24,
-          boxShadow: '0 2px 6px rgba(0,40,80,0.15)',
+          borderLeft: '4px solid #C8102E',
+          boxShadow: '0 2px 6px rgba(0,0,0,0.05)',
         }}>
-          <div style={{ color: '#CCCCCC', fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.6 }}>
+          <div style={{ color: '#C8102E', fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.6 }}>
             My Work Summary
           </div>
           {[
-            { label: 'Assigned to me',  value: myIncidents.length, color: 'white' },
-            { label: 'Still open',       value: myOpen,             color: myOpen > 0 ? '#FFC4C4' : '#CCCCCC' },
-            { label: 'Resolved',         value: myIncidents.length - myOpen, color: '#86EFAC' },
+            { label: 'Assigned to me',  value: myIncidents.length, color: '#1A1A1A' },
+            { label: 'Still open',       value: myOpen,             color: myOpen > 0 ? '#C8102E' : '#6B7C72' },
+            { label: 'Resolved',         value: myIncidents.length - myOpen, color: '#00843D' },
           ].map((s, i) => (
             <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <div style={{ fontSize: 22, fontWeight: 700, color: s.color }}>{s.value}</div>
-              <div style={{ fontSize: 11, color: '#CCCCCC' }}>{s.label}</div>
-              {i < 2 && <div style={{ width: 1, height: 24, background: '#002D54', marginLeft: 14 }} />}
+              <div style={{ fontSize: 11, color: '#6B7C72' }}>{s.label}</div>
+              {i < 2 && <div style={{ width: 1, height: 24, background: '#D8DFE6', marginLeft: 14 }} />}
             </div>
           ))}
           <div style={{ marginLeft: 'auto', fontSize: 11, color: '#888888' }}>
@@ -436,11 +437,11 @@ export default function Dashboard() {
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
-                <tr style={{ background: '#1A1A1A' }}>
+                <tr style={{ background: '#F5F5F5' }}>
                   {['Incident ID', 'Severity', 'Service', 'Description', 'Status', 'Assigned', 'Time'].map(h => (
                     <th key={h} style={{
                       padding: '9px 14px', textAlign: 'left', fontSize: 10.5,
-                      fontWeight: 600, color: '#CCCCCC', letterSpacing: 0.5,
+                      fontWeight: 600, color: '#C8102E', letterSpacing: 0.5,
                       textTransform: 'uppercase', borderBottom: '2px solid #C8102E',
                       whiteSpace: 'nowrap',
                     }}>{h}</th>

@@ -7,10 +7,13 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const T = {
-  kraGreen:     "#003C71", // Primary Navy Blue
-  kraGreenDark: "#002D54", // Dark Navy
-  kraGreenLight:"#F0F4F8", // Light Blue/Gray
-  kraGold:      "#C8922A", // KRA Gold
+  kraGreen:     "#C8102E", // KRA Red (Primary)
+  kraGreenDark: "#1A1A1A", // Dark text
+  kraGreenLight:"#F5F5F5", // Light Grey
+  kraGold:      "#C8102E", // KRA Red
+
+  success:      "#00843D",
+  successLight: "#E8F5EE",
 
   danger:       "#C62828",
   dangerLight:  "#FFEBEE",
@@ -30,7 +33,7 @@ export const T = {
 };
 
 export const STATUS_META = {
-  up:       { label: "Operational", color: T.kraGreen, bg: T.kraGreenLight, dot: "#22c55e" },
+  up:       { label: "Operational", color: T.success, bg: T.successLight, dot: "#22c55e" },
   degraded: { label: "Degraded",    color: T.warning,  bg: T.warningLight,  dot: "#f59e0b" },
   down:     { label: "Disruption",  color: T.danger,   bg: T.dangerLight,   dot: "#ef4444" },
   warning:  { label: "Warning",     color: T.warning,  bg: T.warningLight,  dot: "#f59e0b" },

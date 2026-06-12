@@ -1,17 +1,14 @@
 /* KRA Design Tokens — matches kra.go.ke */
 :root {
-  --kra-blue:         #003C71;
-  --kra-blue-dark:    #002D54;
-  --kra-blue-deep:    #001D38;
-  --kra-blue-mid:     #5E8AB4;
-  --kra-blue-light:   #F0F4F8;
-  --kra-blue-pale:    #F5F8FA;
+  --kra-primary:      #C8102E;
+  --kra-primary-dark: #A00C24;
+  --kra-primary-light:#F5F8FA;
 
-  --kra-red:          #BB0000;
+  --kra-red:          #C8102E;
   --kra-red-light:    #FFF0F0;
 
-  --kra-gold:         #C8922A;
-  --kra-gold-light:   #FEF6E7;
+  --kra-success:      #00843D;
+  --kra-success-light:#E8F5EE;
 
   --kra-white:        #FFFFFF;
   --kra-off-white:    #F5F7F5;
@@ -19,10 +16,10 @@
   --kra-border:       #D8DFE6;
   --kra-mid-gray:     #C6CFD6;
 
-  --kra-text:         #1A2B1F;
-  --kra-text-mid:     #3D5247;
+  --kra-text:         #1A1A1A;
+  --kra-text-mid:     #4A5568;
   --kra-text-light:   #6B7C72;
-  --kra-text-muted:   #96A89E;
+  --kra-text-muted:   #8896A6;
 
   --font-main: 'Source Sans Pro', 'Segoe UI', Calibri, sans-serif;
   --font-mono: 'Source Code Pro', 'Courier New', monospace;
@@ -45,16 +42,16 @@ body {
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: var(--kra-light-gray); }
 ::-webkit-scrollbar-thumb { background: var(--kra-mid-gray); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--kra-blue); }
+::-webkit-scrollbar-thumb:hover { background: var(--kra-primary); }
 
-a { color: var(--kra-blue); text-decoration: none; }
+a { color: var(--kra-primary); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 button { cursor: pointer; font-family: var(--font-main); }
 input, textarea, select { font-family: var(--font-main); }
 
 input:focus, textarea:focus, select:focus, button:focus-visible {
-  outline: 2px solid var(--kra-blue);
+  outline: 2px solid var(--kra-primary);
   outline-offset: 1px;
 }
 

@@ -45,13 +45,13 @@ export default function NavBar() {
       {/* <div style={{display:'none'}}>role:{user?.role} path:{location.pathname}</div> */}
       {/* ── Utility bar ── */}
       <div style={{
-        background: '#1A1A1A', padding: '0 24px',
+        background: '#FFFFFF', padding: '0 24px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        height: 34,
+        height: 34, borderBottom: '1px solid #EAEEF0'
       }}>
         <div style={{ display: 'flex', gap: 20 }}>
           {['About KRA', 'Careers', 'Contact Us', 'www.kra.go.ke'].map(l => (
-            <span key={l} style={{ fontSize: 11, color: '#CCCCCC', cursor: 'pointer' }}>{l}</span>
+            <span key={l} style={{ fontSize: 11, color: '#6B7C72', cursor: 'pointer' }}>{l}</span>
           ))}
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
@@ -67,7 +67,7 @@ export default function NavBar() {
               </span>
             </div>
           )}
-          <span style={{ fontSize: 11, color: '#CCCCCC' }}>{now}</span>
+          <span style={{ fontSize: 11, color: '#6B7C72' }}>{now}</span>
         </div>
       </div>
 
@@ -78,25 +78,17 @@ export default function NavBar() {
         gap: 20, height: 72,
         boxShadow: '0 2px 6px rgba(0,40,80,0.1)',
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-          <KRALogo size={52} />
-          <div style={{ borderLeft: '3px solid #C8102E', paddingLeft: 14 }}>
-            <div style={{ fontSize: 16, fontWeight: 700, color: '#1A1A1A', lineHeight: 1.2 }}>
-              Kenya Revenue Authority
-            </div>
-            <div style={{ fontSize: 10.5, color: '#6B7C72', textTransform: 'uppercase', letterSpacing: 0.8, marginTop: 2 }}>
-              Corporate Support Services · ICT Division
-            </div>
-          </div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <KRALogo height={60} />
         </div>
 
         <div style={{ width: 1, height: 40, background: '#D8DFE6', margin: '0 8px' }} />
 
         <div>
-          <div style={{ fontSize: 14, fontWeight: 700, color: '#1A2B1F' }}>
-            AI-Powered Network Incident Diagnostics
+          <div style={{ fontSize: 18, fontWeight: 800, color: '#1A2B1F', display: 'flex', alignItems: 'center', gap: 8 }}>
+            <span style={{ color: '#C8102E', fontSize: 20 }}>NOC</span> Assistant
           </div>
-          <div style={{ fontSize: 11, color: '#6B7C72', marginTop: 2 }}>
+          <div style={{ fontSize: 11, color: '#6B7C72', marginTop: 2, letterSpacing: 0.3 }}>
             Network Operations Centre · VPN & Infrastructure Monitoring
           </div>
         </div>
@@ -122,9 +114,10 @@ export default function NavBar() {
 
       {/* ── Nav tabs ── */}
       <div style={{
-        background: '#1A1A1A', padding: '0 24px',
+        background: '#FFFFFF', padding: '0 24px',
         display: 'flex', alignItems: 'stretch', gap: 2, height: 44,
-        boxShadow: '0 2px 4px rgba(0,0,0,0.15)',
+        boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
+        borderBottom: '2px solid #C8102E'
       }}>
         {NAV_ITEMS.map(n => {
           const base = (user?.role === 'admin') ? '/pages/admin' : '/pages/ict_officer';
@@ -137,9 +130,9 @@ export default function NavBar() {
               key={n.key}
               onClick={() => navigate(pathForRole)}
               style={{
-                padding: '0 18px', background: active ? '#000000' : 'transparent',
+                padding: '0 18px', background: 'transparent',
                 border: 'none', borderBottom: active ? '3px solid #C8102E' : '3px solid transparent',
-                color: active ? 'white' : '#C4D4E3',
+                color: active ? '#C8102E' : '#6B7C72',
                 fontFamily: 'inherit', fontSize: 12.5,
                 fontWeight: active ? 700 : 400,
                 cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 7,
@@ -159,7 +152,7 @@ export default function NavBar() {
         })}
 
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 10 }}>
-          <span style={{ fontSize: 11, color: '#A2B9CE' }}>NOC — Real-time monitoring</span>
+          <span style={{ fontSize: 11, color: '#6B7C72' }}>NOC — Real-time monitoring</span>
         </div>
       </div>
     </>

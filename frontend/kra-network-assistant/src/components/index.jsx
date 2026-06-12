@@ -49,12 +49,12 @@ export function CardHeader({ title, subtitle, action }) {
     return (
       <div style={{
         padding: '12px 18px',
-        borderBottom: '2px solid #003C71',
+        borderBottom: '2px solid #C8102E',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         background: '#F5F8FA',
         }}>
         <div>
-            <div style={{ fontSize: 13, fontWeight: 700, color: '#003C71', letterSpacing: 0.3 }}>{title}</div>
+            <div style={{ fontSize: 13, fontWeight: 700, color: '#C8102E', letterSpacing: 0.3 }}>{title}</div>
             {subtitle && <div style={{ fontSize: 11, color: '#6B7C72', marginTop: 2 }}>{subtitle}</div>}
         </div>
         {action}
@@ -63,12 +63,12 @@ export function CardHeader({ title, subtitle, action }) {
 }
 
 // KRA Logo — prefer a user-provided `/logo.png` in the public folder, fall back to `logo192.png` and favicon
-export function KRALogo({ size = 48 }) {
+export function KRALogo({ size, height = 48, width = 'auto' }) {
   const publicPng = (process.env.PUBLIC_URL || '') + '/logo.png';
   const fallbackPublic = (process.env.PUBLIC_URL || '') + '/logo192.png';
   const finalFallback = (process.env.PUBLIC_URL || '') + '/favicon.ico';
   const [src, setSrc] = useState(publicPng);
-  const style = { width: size, height: size, display: 'inline-block', objectFit: 'contain' };
+  const style = { height: size || height, width: size ? size : width, display: 'inline-block', objectFit: 'contain' };
 
   function handleError(e) {
     const current = e?.target?.src || '';
@@ -116,7 +116,7 @@ export function StatusDot({ status, animate = false }) {
 }
 
 //Sparkline
-export function Sparkline({ data = [], color = '#003C71', height = 36 }) {
+export function Sparkline({ data = [], color = '#C8102E', height = 36 }) {
   const max = Math.max(...data, 1);
   return (
     <div style={{ display: 'flex', alignItems: 'flex-end', gap: 2, height }}>
@@ -147,9 +147,9 @@ export function PageHeader({ title, breadcrumb, children }) {
   return (
     <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 18 }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-        <div style={{ width: 4, height: 20, background: '#003C71', borderRadius: 1 }} />
+        <div style={{ width: 4, height: 20, background: '#C8102E', borderRadius: 1 }} />
         <div>
-          <h1 style={{ fontSize: 17, fontWeight: 700, color: '#003C71' }}>{title}</h1>
+          <h1 style={{ fontSize: 17, fontWeight: 700, color: '#C8102E' }}>{title}</h1>
           {breadcrumb && (
             <div style={{ fontSize: 11, color: '#6B7C72', marginTop: 1 }}>
               Home › ICT Division › NOC › {breadcrumb}
