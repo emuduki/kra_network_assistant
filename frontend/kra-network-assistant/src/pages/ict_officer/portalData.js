@@ -7,10 +7,10 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const T = {
-  kraGreen:     "#00843D",
-  kraGreenDark: "#006830",
-  kraGreenLight:"#E8F5EE",
-  kraGold:      "#F9A825",
+  kraGreen:     "#003C71", // Primary Navy Blue
+  kraGreenDark: "#002D54", // Dark Navy
+  kraGreenLight:"#F0F4F8", // Light Blue/Gray
+  kraGold:      "#C8922A", // KRA Gold
 
   danger:       "#C62828",
   dangerLight:  "#FFEBEE",

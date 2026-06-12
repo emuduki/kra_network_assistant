@@ -40,13 +40,13 @@ export default function VPNHealth() {
   return (
     <div className="fadeIn">
       <PageHeader title="VPN Tunnel Health Monitor" breadcrumb="VPN Health">
-        <button onClick={fetchTunnels} style={{ background: '#E8F5EE', border: '1px solid #006B3C50', color: '#006B3C', padding: '6px 14px', borderRadius: 2, fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>⟳ Refresh</button>
+        <button onClick={fetchTunnels} style={{ background: '#F0F4F8', border: '1px solid #003C7150', color: '#003C71', padding: '6px 14px', borderRadius: 2, fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>⟳ Refresh</button>
       </PageHeader>
 
       {/* Summary cards */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 14, marginBottom: 20 }}>
         {[
-          { label: 'Active Tunnels',   value: up,       total: tunnels.length, color: '#006B3C', bg: '#E8F5EE' },
+          { label: 'Active Tunnels',   value: up,       total: tunnels.length, color: '#003C71', bg: '#F0F4F8' },
           { label: 'Degraded Tunnels', value: degraded, total: tunnels.length, color: '#C8922A', bg: '#FEF6E7' },
           { label: 'Offline Tunnels',  value: down,     total: tunnels.length, color: '#BB0000', bg: '#FFF0F0' },
         ].map((s, i) => (
@@ -73,9 +73,9 @@ export default function VPNHealth() {
         {tunnelsLoading && tunnels.length === 0 ? <LoadingSpinner message="Loading tunnels..." /> : (
           <div>
             {/* Header row */}
-            <div style={{ display: 'grid', gridTemplateColumns: '14px 1.4fr 1.2fr 100px 90px 90px 110px 110px', gap: 0, padding: '9px 18px', background: '#003D22', borderBottom: '2px solid #C8922A' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '14px 1.4fr 1.2fr 100px 90px 90px 110px 110px', gap: 0, padding: '9px 18px', background: '#001D38', borderBottom: '2px solid #C8922A' }}>
               {['', 'Tunnel Name', 'Peer IP / Ref', 'Status', 'Latency', 'Uptime', 'Last Check', 'Action'].map((h, i) => (
-                <div key={i} style={{ fontSize: 10, color: '#9ABFAB', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5, padding: '0 6px' }}>{h}</div>
+                <div key={i} style={{ fontSize: 10, color: '#A2B9CE', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5, padding: '0 6px' }}>{h}</div>
               ))}
             </div>
             {tunnels.length === 0 ? (
@@ -105,7 +105,7 @@ export default function VPNHealth() {
                 <div style={{ padding: '0 6px', fontSize: 11, color: '#96A89E' }}>{timeSince(t.last_checked)}</div>
                 <div style={{ padding: '0 6px' }}>
                   <button onClick={() => handleDiagnose(t)} style={{
-                    background: '#E8F5EE', border: '1px solid #006B3C50', color: '#006B3C',
+                    background: '#F0F4F8', border: '1px solid #003C7150', color: '#003C71',
                     padding: '5px 12px', borderRadius: 2, fontSize: 11, fontWeight: 600,
                     cursor: 'pointer', fontFamily: 'inherit', whiteSpace: 'nowrap',
                   }}>Diagnose →</button>

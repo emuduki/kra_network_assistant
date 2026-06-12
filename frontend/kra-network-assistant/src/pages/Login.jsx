@@ -61,7 +61,7 @@ export default function Login() {
 
   return (
     <div style={{
-      minHeight: '100vh', background: '#003D22',
+      minHeight: '100vh', background: '#001D38',
       display: 'flex', alignItems: 'center', justifyContent: 'center',
     }}>
       {/* Background pattern */}
@@ -76,9 +76,9 @@ export default function Login() {
           border: '1px solid #D8DFE6', overflow: 'hidden',
           boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
         }}>
-          {/* Green header */}
+          {/* Navy header */}
           <div style={{
-            background: '#006B3C', padding: '28px 32px',
+            background: '#003C71', padding: '28px 32px',
             borderBottom: '3px solid #C8922A', textAlign: 'center',
           }}>
             <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 14 }}>
@@ -87,7 +87,7 @@ export default function Login() {
             <div style={{ fontSize: 16, fontWeight: 700, color: '#fff', letterSpacing: 0.3 }}>
               Kenya Revenue Authority
             </div>
-            <div style={{ fontSize: 11, color: '#9ABFAB', marginTop: 4, textTransform: 'uppercase', letterSpacing: 0.8 }}>
+            <div style={{ fontSize: 11, color: '#A2B9CE', marginTop: 4, textTransform: 'uppercase', letterSpacing: 0.8 }}>
               ICT Division · Network Operations Centre
             </div>
           </div>
@@ -128,7 +128,7 @@ export default function Login() {
               type="submit"
               disabled={loading}
               style={{
-                width: '100%', padding: '11px', background: loading ? '#96A89E' : '#006B3C',
+                width: '100%', padding: '11px', background: loading ? '#96A89E' : '#003C71',
                 border: 'none', borderRadius: 2, color: '#fff',
                 fontSize: 13, fontWeight: 600, letterSpacing: 0.4,
                 cursor: loading ? 'not-allowed' : 'pointer',
@@ -145,7 +145,7 @@ export default function Login() {
           </form>
         </div>
 
-        <div style={{ textAlign: 'center', marginTop: 16, fontSize: 11, color: '#4a7c59' }}>
+        <div style={{ textAlign: 'center', marginTop: 16, fontSize: 11, color: '#5E8AB4' }}>
           © Kenya Revenue Authority {new Date().getFullYear()} · AI Network Incident Diagnostics
         </div>
       </div>

@@ -26,14 +26,14 @@ function Message({ msg }) {
   return (
     <div style={{ display: 'flex', justifyContent: isUser ? 'flex-end' : 'flex-start', gap: 10 }}>
       {!isUser && (
-        <div style={{ width: 32, height: 32, borderRadius: 3, background: '#006B3C', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: 11, fontWeight: 700, flexShrink: 0, marginTop: 2, border: '1px solid #C8922A40' }}>AI</div>
+        <div style={{ width: 32, height: 32, borderRadius: 3, background: '#003C71', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: 11, fontWeight: 700, flexShrink: 0, marginTop: 2, border: '1px solid #C8922A40' }}>AI</div>
       )}
       <div style={{
         maxWidth: '76%', padding: '12px 16px', borderRadius: 3, fontSize: 13, lineHeight: 1.7,
-        background: isUser ? '#006B3C' : '#FFFFFF',
+        background: isUser ? '#003C71' : '#FFFFFF',
         color: isUser ? 'white' : '#1A2B1F',
         border: isUser ? 'none' : '1px solid #D8DFE6',
-        boxShadow: isUser ? 'none' : '0 1px 4px rgba(0,60,30,0.06)',
+        boxShadow: isUser ? 'none' : '0 1px 4px rgba(0,40,80,0.06)',
       }}>
         {parts.map((part, i) => {
           if (part.startsWith('```')) {
@@ -48,7 +48,7 @@ function Message({ msg }) {
         })}
       </div>
       {isUser && (
-        <div style={{ width: 32, height: 32, borderRadius: 3, background: '#003D22', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#9ABFAB', fontSize: 11, fontWeight: 700, flexShrink: 0, marginTop: 2 }}>
+        <div style={{ width: 32, height: 32, borderRadius: 3, background: '#001D38', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#A2B9CE', fontSize: 11, fontWeight: 700, flexShrink: 0, marginTop: 2 }}>
           You
         </div>
       )}
@@ -138,13 +138,13 @@ export default function Assistant() {
           <div style={{ padding: '12px 16px', display: 'flex', flexWrap: 'wrap', gap: 8 }}>
             {SUGGESTIONS.map((q, i) => (
               <button key={i} onClick={() => sendMessage(q)} style={{
-                background: '#E8F5EE', border: '1px solid #006B3C40', borderRadius: 2,
-                padding: '7px 14px', fontSize: 12, color: '#006B3C',
+                background: '#F0F4F8', border: '1px solid #003C7140', borderRadius: 2,
+                padding: '7px 14px', fontSize: 12, color: '#003C71',
                 cursor: 'pointer', fontFamily: 'inherit', fontWeight: 500,
                 transition: 'all 0.15s',
               }}
-                onMouseEnter={e => { e.target.style.background = '#006B3C'; e.target.style.color = 'white'; }}
-                onMouseLeave={e => { e.target.style.background = '#E8F5EE'; e.target.style.color = '#006B3C'; }}
+                onMouseEnter={e => { e.target.style.background = '#003C71'; e.target.style.color = 'white'; }}
+                onMouseLeave={e => { e.target.style.background = '#F0F4F8'; e.target.style.color = '#003C71'; }}
               >{q}</button>
             ))}
           </div>
@@ -156,7 +156,7 @@ export default function Assistant() {
         <div style={{ flex: 1, overflowY: 'auto', padding: 18, display: 'flex', flexDirection: 'column', gap: 16, background: '#F5F7F5' }}>
           {messages.length === 0 && (
             <div style={{ textAlign: 'center', color: '#96A89E', paddingTop: 40 }}>
-              <div style={{ fontSize: 36, marginBottom: 12, color: '#006B3C', opacity: 0.3 }}>✦</div>
+              <div style={{ fontSize: 36, marginBottom: 12, color: '#003C71', opacity: 0.3 }}>✦</div>
               <div style={{ fontWeight: 600, color: '#6B7C72', fontSize: 13 }}>KRA AI Network Assistant</div>
               <div style={{ fontSize: 12, marginTop: 4 }}>Ask about incidents, VPN config, certificates, DNS, firewall rules</div>
             </div>
@@ -164,8 +164,8 @@ export default function Assistant() {
           {messages.map((m, i) => <Message key={i} msg={m} />)}
           {loading && (
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <div style={{ width: 32, height: 32, borderRadius: 3, background: '#006B3C', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: 11, fontWeight: 700 }}>AI</div>
-              <div style={{ padding: '12px 16px', background: 'white', border: '1px solid #D8DFE6', borderRadius: 3, fontSize: 12, color: '#006B3C', display: 'flex', alignItems: 'center', gap: 8 }}>
+              <div style={{ width: 32, height: 32, borderRadius: 3, background: '#003C71', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: 11, fontWeight: 700 }}>AI</div>
+              <div style={{ padding: '12px 16px', background: 'white', border: '1px solid #D8DFE6', borderRadius: 3, fontSize: 12, color: '#003C71', display: 'flex', alignItems: 'center', gap: 8 }}>
                 <span style={{ animation: 'pulse 1s infinite' }}>●</span> Thinking...
               </div>
             </div>
@@ -175,7 +175,7 @@ export default function Assistant() {
         </div>
 
         {/* Input bar */}
-        <div style={{ padding: '12px 16px', borderTop: '2px solid #006B3C', background: 'white', display: 'flex', gap: 10 }}>
+        <div style={{ padding: '12px 16px', borderTop: '2px solid #003C71', background: 'white', display: 'flex', gap: 10 }}>
           <input
             ref={inputRef}
             value={input}
@@ -189,7 +189,7 @@ export default function Assistant() {
             }}
           />
           <button onClick={() => sendMessage()} disabled={loading || !input.trim()} style={{
-            background: loading || !input.trim() ? '#96A89E' : '#006B3C',
+            background: loading || !input.trim() ? '#96A89E' : '#003C71',
             border: 'none', color: 'white', padding: '10px 22px', borderRadius: 2,
             fontSize: 12, fontWeight: 600, cursor: loading || !input.trim() ? 'not-allowed' : 'pointer',
             fontFamily: 'inherit', letterSpacing: 0.3,

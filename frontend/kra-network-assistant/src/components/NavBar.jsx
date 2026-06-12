@@ -45,13 +45,13 @@ export default function NavBar() {
       {/* <div style={{display:'none'}}>role:{user?.role} path:{location.pathname}</div> */}
       {/* ── Utility bar ── */}
       <div style={{
-        background: '#003D22', padding: '0 24px',
+        background: '#001D38', padding: '0 24px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         height: 34,
       }}>
         <div style={{ display: 'flex', gap: 20 }}>
           {['About KRA', 'Careers', 'Contact Us', 'www.kra.go.ke'].map(l => (
-            <span key={l} style={{ fontSize: 11, color: '#9ABFAB', cursor: 'pointer' }}>{l}</span>
+            <span key={l} style={{ fontSize: 11, color: '#A2B9CE', cursor: 'pointer' }}>{l}</span>
           ))}
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
@@ -67,21 +67,21 @@ export default function NavBar() {
               </span>
             </div>
           )}
-          <span style={{ fontSize: 11, color: '#9ABFAB' }}>{now}</span>
+          <span style={{ fontSize: 11, color: '#A2B9CE' }}>{now}</span>
         </div>
       </div>
 
       {/* ── Main header ── */}
       <div style={{
-        background: '#FFFFFF', borderBottom: '3px solid #006B3C',
+        background: '#FFFFFF', borderBottom: '3px solid #003C71',
         padding: '0 24px', display: 'flex', alignItems: 'center',
         gap: 20, height: 72,
-        boxShadow: '0 2px 6px rgba(0,60,30,0.1)',
+        boxShadow: '0 2px 6px rgba(0,40,80,0.1)',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
           <KRALogo size={52} />
           <div style={{ borderLeft: '3px solid #C8922A', paddingLeft: 14 }}>
-            <div style={{ fontSize: 16, fontWeight: 700, color: '#006B3C', lineHeight: 1.2 }}>
+            <div style={{ fontSize: 16, fontWeight: 700, color: '#003C71', lineHeight: 1.2 }}>
               Kenya Revenue Authority
             </div>
             <div style={{ fontSize: 10.5, color: '#6B7C72', textTransform: 'uppercase', letterSpacing: 0.8, marginTop: 2 }}>
@@ -108,7 +108,7 @@ export default function NavBar() {
           </div>
           <div style={{
             width: 36, height: 36, borderRadius: '50%',
-            background: '#006B3C', display: 'flex', alignItems: 'center',
+            background: '#003C71', display: 'flex', alignItems: 'center',
             justifyContent: 'center', color: '#fff', fontSize: 13, fontWeight: 700,
             border: '2px solid #FEF6E7', cursor: 'pointer',
           }}
@@ -122,9 +122,9 @@ export default function NavBar() {
 
       {/* ── Nav tabs ── */}
       <div style={{
-        background: '#006B3C', padding: '0 24px',
+        background: '#003C71', padding: '0 24px',
         display: 'flex', alignItems: 'stretch', gap: 2, height: 44,
-        boxShadow: '0 2px 4px rgba(0,50,25,0.15)',
+        boxShadow: '0 2px 4px rgba(0,40,80,0.15)',
       }}>
         {NAV_ITEMS.map(n => {
           const base = (user?.role === 'admin') ? '/pages/admin' : '/pages/ict_officer';
@@ -137,9 +137,9 @@ export default function NavBar() {
               key={n.key}
               onClick={() => navigate(pathForRole)}
               style={{
-                padding: '0 18px', background: active ? '#003D22' : 'transparent',
+                padding: '0 18px', background: active ? '#001D38' : 'transparent',
                 border: 'none', borderBottom: active ? '3px solid #C8922A' : '3px solid transparent',
-                color: active ? 'white' : '#B8D9C6',
+                color: active ? 'white' : '#C4D4E3',
                 fontFamily: 'inherit', fontSize: 12.5,
                 fontWeight: active ? 700 : 400,
                 cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 7,
@@ -159,7 +159,7 @@ export default function NavBar() {
         })}
 
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 10 }}>
-          <span style={{ fontSize: 11, color: '#9ABFAB' }}>NOC — Real-time monitoring</span>
+          <span style={{ fontSize: 11, color: '#A2B9CE' }}>NOC — Real-time monitoring</span>
         </div>
       </div>
     </>

@@ -1,11 +1,11 @@
 /* KRA Design Tokens — matches kra.go.ke */
 :root {
-  --kra-green:        #006B3C;
-  --kra-green-dark:   #004D2B;
-  --kra-green-deep:   #003D22;
-  --kra-green-mid:    #00853D;
-  --kra-green-light:  #E8F5EE;
-  --kra-green-pale:   #F0FAF4;
+  --kra-blue:         #003C71;
+  --kra-blue-dark:    #002D54;
+  --kra-blue-deep:    #001D38;
+  --kra-blue-mid:     #5E8AB4;
+  --kra-blue-light:   #F0F4F8;
+  --kra-blue-pale:    #F5F8FA;
 
   --kra-red:          #BB0000;
   --kra-red-light:    #FFF0F0;
@@ -45,16 +45,16 @@ body {
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: var(--kra-light-gray); }
 ::-webkit-scrollbar-thumb { background: var(--kra-mid-gray); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--kra-green); }
+::-webkit-scrollbar-thumb:hover { background: var(--kra-blue); }
 
-a { color: var(--kra-green); text-decoration: none; }
+a { color: var(--kra-blue); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 button { cursor: pointer; font-family: var(--font-main); }
 input, textarea, select { font-family: var(--font-main); }
 
 input:focus, textarea:focus, select:focus, button:focus-visible {
-  outline: 2px solid var(--kra-green);
+  outline: 2px solid var(--kra-blue);
   outline-offset: 1px;
 }
 

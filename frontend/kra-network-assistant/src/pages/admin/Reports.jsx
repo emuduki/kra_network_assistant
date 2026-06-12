@@ -5,21 +5,21 @@ import { Card, PageHeader, Badge } from '../../components/index.jsx';
 function ReportCard({ icon, title, desc, period, tag, onGenerate, loading }) {
   return (
     <Card style={{ transition: 'border-color 0.15s', cursor: 'pointer' }}
-      onMouseEnter={e => e.currentTarget.style.borderColor = '#006B3C'}
+      onMouseEnter={e => e.currentTarget.style.borderColor = '#003C71'}
       onMouseLeave={e => e.currentTarget.style.borderColor = '#D8DFE6'}
     >
-      <div style={{ borderTop: '3px solid #006B3C', borderRadius: '2px 2px 0 0' }} />
+      <div style={{ borderTop: '3px solid #003C71', borderRadius: '2px 2px 0 0' }} />
       <div style={{ padding: '16px 18px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>
           <span style={{ fontSize: 24 }}>{icon}</span>
-          <span style={{ fontSize: 10, padding: '2px 8px', background: '#E8F5EE', color: '#006B3C', borderRadius: 2, fontWeight: 600, letterSpacing: 0.4, height: 'fit-content' }}>{tag}</span>
+          <span style={{ fontSize: 10, padding: '2px 8px', background: '#F0F4F8', color: '#003C71', borderRadius: 2, fontWeight: 600, letterSpacing: 0.4, height: 'fit-content' }}>{tag}</span>
         </div>
         <div style={{ fontSize: 13, fontWeight: 700, color: '#1A2B1F', marginBottom: 6 }}>{title}</div>
         <div style={{ fontSize: 11.5, color: '#3D5247', lineHeight: 1.6, marginBottom: 12 }}>{desc}</div>
         <div style={{ fontSize: 10.5, color: '#96A89E', marginBottom: 14, fontFamily: "'Source Code Pro', monospace" }}>{period}</div>
         <button onClick={onGenerate} disabled={loading} style={{
-          width: '100%', background: loading ? '#96A89E' : '#E8F5EE',
-          border: '1px solid #006B3C50', color: loading ? 'white' : '#006B3C',
+          width: '100%', background: loading ? '#96A89E' : '#F0F4F8',
+          border: '1px solid #003C7150', color: loading ? 'white' : '#003C71',
           padding: '8px 0', borderRadius: 2, fontSize: 12, fontWeight: 600,
           cursor: loading ? 'not-allowed' : 'pointer', fontFamily: 'inherit',
           transition: 'all 0.15s',
@@ -110,7 +110,7 @@ export default function Reports() {
     <div className="fadeIn">
       <PageHeader title="Reports & Publications" breadcrumb="Reports" />
 
-      <div style={{ background: '#006B3C', color: 'white', padding: '8px 16px', fontSize: 12, fontWeight: 600, letterSpacing: 0.5, textTransform: 'uppercase', marginBottom: 16, borderRadius: 2, display: 'flex', justifyContent: 'space-between' }}>
+      <div style={{ background: '#003C71', color: 'white', padding: '8px 16px', fontSize: 12, fontWeight: 600, letterSpacing: 0.5, textTransform: 'uppercase', marginBottom: 16, borderRadius: 2, display: 'flex', justifyContent: 'space-between' }}>
         <span>Available Reports</span>
         <span style={{ opacity: 0.6, fontWeight: 400 }}>{now}</span>
       </div>
@@ -126,14 +126,14 @@ export default function Reports() {
 
       {/* Generated report preview */}
       {reportData && (
-        <Card style={{ borderLeft: '4px solid #006B3C' }}>
-          <div style={{ padding: '14px 18px', background: '#F0FAF4', borderBottom: '1px solid #D8DFE6', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <Card style={{ borderLeft: '4px solid #003C71' }}>
+          <div style={{ padding: '14px 18px', background: '#F5F8FA', borderBottom: '1px solid #D8DFE6', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <div>
-              <div style={{ fontSize: 14, fontWeight: 700, color: '#006B3C' }}>{reportData.title}</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: '#003C71' }}>{reportData.title}</div>
               <div style={{ fontSize: 11, color: '#6B7C72', marginTop: 2 }}>Generated {reportData.generated} · {user?.name}</div>
             </div>
             <div style={{ display: 'flex', gap: 10 }}>
-              <button onClick={exportTxt} style={{ background: '#006B3C', border: 'none', color: 'white', padding: '7px 16px', borderRadius: 2, fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>
+              <button onClick={exportTxt} style={{ background: '#003C71', border: 'none', color: 'white', padding: '7px 16px', borderRadius: 2, fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>
                 ↓ Export .txt
               </button>
               <button onClick={() => setReportData(null)} style={{ background: 'none', border: '1px solid #D8DFE6', color: '#6B7C72', padding: '7px 14px', borderRadius: 2, fontSize: 12, cursor: 'pointer', fontFamily: 'inherit' }}>
@@ -144,7 +144,7 @@ export default function Reports() {
           <div style={{ padding: 20 }}>
             {reportData.sections.map((s, i) => (
               <div key={i} style={{ marginBottom: 20 }}>
-                <div style={{ fontSize: 11, fontWeight: 700, color: '#006B3C', textTransform: 'uppercase', letterSpacing: 0.6, marginBottom: 8, paddingBottom: 6, borderBottom: '1px solid #EAEEF0' }}>{s.heading}</div>
+                <div style={{ fontSize: 11, fontWeight: 700, color: '#003C71', textTransform: 'uppercase', letterSpacing: 0.6, marginBottom: 8, paddingBottom: 6, borderBottom: '1px solid #EAEEF0' }}>{s.heading}</div>
                 {s.content && <div style={{ fontSize: 13, color: '#3D5247', lineHeight: 1.7, whiteSpace: 'pre-wrap' }}>{s.content}</div>}
                 {s.table && s.table.length > 0 && (
                   <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: 8 }}>
@@ -158,10 +158,10 @@ export default function Reports() {
                     <tbody>
                       {s.table.map((row, j) => (
                         <tr key={j} style={{ background: j % 2 === 0 ? 'white' : '#F5F7F5' }}>
-                          <td style={{ padding: '7px 12px', fontSize: 11, fontFamily: "'Source Code Pro', monospace", color: '#006B3C', borderBottom: '1px solid #EAEEF0' }}>{row.incident_ref || row.tunnel_ref}</td>
+                          <td style={{ padding: '7px 12px', fontSize: 11, fontFamily: "'Source Code Pro', monospace", color: '#003C71', borderBottom: '1px solid #EAEEF0' }}>{row.incident_ref || row.tunnel_ref}</td>
                           <td style={{ padding: '7px 12px', fontSize: 12, fontWeight: 600, borderBottom: '1px solid #EAEEF0' }}>{row.service}</td>
                           <td style={{ padding: '7px 12px', fontSize: 12, color: '#3D5247', maxWidth: 200, borderBottom: '1px solid #EAEEF0' }}><div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: 200 }}>{row.description}</div></td>
-                          <td style={{ padding: '7px 12px', borderBottom: '1px solid #EAEEF0' }}><span style={{ fontSize: 11, fontWeight: 600, color: row.status === 'Open' ? '#BB0000' : row.status === 'up' ? '#006B3C' : '#C8922A' }}>{row.status}</span></td>
+                          <td style={{ padding: '7px 12px', borderBottom: '1px solid #EAEEF0' }}><span style={{ fontSize: 11, fontWeight: 600, color: row.status === 'Open' ? '#BB0000' : row.status === 'up' ? '#00843D' : '#C8922A' }}>{row.status}</span></td>
                           <td style={{ padding: '7px 12px', borderBottom: '1px solid #EAEEF0' }}><Badge status={row.severity} /></td>
                         </tr>
                       ))}

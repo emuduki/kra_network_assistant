@@ -49,16 +49,16 @@ function IncidentRow({ inc, ismine, onClick, isLast }) {
       onClick={() => onClick(inc)}
       style={{
         cursor: 'pointer',
-        background: ismine ? '#F0FAF4' : 'transparent',
-        borderLeft: ismine ? '3px solid #006B3C' : '3px solid transparent',
+        background: ismine ? '#F5F8FA' : 'transparent',
+        borderLeft: ismine ? '3px solid #003C71' : '3px solid transparent',
         transition: 'background 0.15s',
       }}
-      onMouseEnter={e => e.currentTarget.style.background = ismine ? '#E8F5EE' : '#F5F7F5'}
-      onMouseLeave={e => e.currentTarget.style.background = ismine ? '#F0FAF4' : 'transparent'}
+      onMouseEnter={e => e.currentTarget.style.background = ismine ? '#F0F4F8' : '#F5F7F5'}
+      onMouseLeave={e => e.currentTarget.style.background = ismine ? '#F5F8FA' : 'transparent'}
     >
-      <td style={{ padding: '9px 14px', fontFamily: "'Source Code Pro', monospace", fontSize: 11, color: '#006B3C', fontWeight: 600, borderBottom: isLast ? 'none' : '1px solid #EAEEF0' }}>
+      <td style={{ padding: '9px 14px', fontFamily: "'Source Code Pro', monospace", fontSize: 11, color: '#003C71', fontWeight: 600, borderBottom: isLast ? 'none' : '1px solid #EAEEF0' }}>
         {inc.incident_ref}
-        {ismine && <span style={{ marginLeft: 6, fontSize: 9, background: '#006B3C', color: 'white', padding: '1px 5px', borderRadius: 2, fontWeight: 700 }}>MINE</span>}
+        {ismine && <span style={{ marginLeft: 6, fontSize: 9, background: '#003C71', color: 'white', padding: '1px 5px', borderRadius: 2, fontWeight: 700 }}>MINE</span>}
       </td>
       <td style={{ padding: '9px 14px', borderBottom: isLast ? 'none' : '1px solid #EAEEF0' }}>
         <Badge status={inc.severity} />
@@ -73,7 +73,7 @@ function IncidentRow({ inc, ismine, onClick, isLast }) {
         <span style={{
           padding: '2px 8px', borderRadius: 2, fontSize: 11, fontWeight: 600,
           background: inc.status === 'Open' ? '#FFF0F0' : inc.status === 'In Progress' ? '#FEF6E7' : '#E8F5EE',
-          color:      inc.status === 'Open' ? '#BB0000' : inc.status === 'In Progress' ? '#C8922A' : '#006B3C',
+          color:      inc.status === 'Open' ? '#BB0000' : inc.status === 'In Progress' ? '#C8922A' : '#00843D',
         }}>{inc.status}</span>
       </td>
       <td style={{ padding: '9px 14px', fontSize: 11, color: '#96A89E', borderBottom: isLast ? 'none' : '1px solid #EAEEF0' }}>
@@ -171,8 +171,8 @@ export default function Dashboard() {
         <button
           onClick={fetchAll}
           style={{
-            background: '#E8F5EE', border: '1px solid #006B3C50',
-            color: '#006B3C', padding: '6px 14px', borderRadius: 2,
+            background: '#F0F4F8', border: '1px solid #003C7150',
+            color: '#003C71', padding: '6px 14px', borderRadius: 2,
             fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit',
           }}
         >⟳ Refresh</button>
@@ -209,25 +209,25 @@ export default function Dashboard() {
       {/* ── ICT Officer: My work summary strip ── */}
       {!isAdmin && (
         <div style={{
-          background: '#006B3C', borderRadius: 3, padding: '12px 20px',
+          background: '#003C71', borderRadius: 3, padding: '12px 20px',
           marginBottom: 18, display: 'flex', alignItems: 'center', gap: 24,
-          boxShadow: '0 2px 6px rgba(0,80,40,0.15)',
+          boxShadow: '0 2px 6px rgba(0,40,80,0.15)',
         }}>
-          <div style={{ color: '#9ABFAB', fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.6 }}>
+          <div style={{ color: '#A2B9CE', fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.6 }}>
             My Work Summary
           </div>
           {[
             { label: 'Assigned to me',  value: myIncidents.length, color: 'white' },
-            { label: 'Still open',       value: myOpen,             color: myOpen > 0 ? '#FFC4C4' : '#9ABFAB' },
+            { label: 'Still open',       value: myOpen,             color: myOpen > 0 ? '#FFC4C4' : '#A2B9CE' },
             { label: 'Resolved',         value: myIncidents.length - myOpen, color: '#86EFAC' },
           ].map((s, i) => (
             <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <div style={{ fontSize: 22, fontWeight: 700, color: s.color }}>{s.value}</div>
-              <div style={{ fontSize: 11, color: '#9ABFAB' }}>{s.label}</div>
-              {i < 2 && <div style={{ width: 1, height: 24, background: '#005228', marginLeft: 14 }} />}
+              <div style={{ fontSize: 11, color: '#A2B9CE' }}>{s.label}</div>
+              {i < 2 && <div style={{ width: 1, height: 24, background: '#002D54', marginLeft: 14 }} />}
             </div>
           ))}
-          <div style={{ marginLeft: 'auto', fontSize: 11, color: '#4a7c59' }}>
+          <div style={{ marginLeft: 'auto', fontSize: 11, color: '#5E8AB4' }}>
             Auto-refreshes every 30s
           </div>
         </div>
@@ -239,7 +239,7 @@ export default function Dashboard() {
           label="Active VPN Tunnels"
           value={`${tunnelsUp} / ${tunnels.length}`}
           sub={tunnelsDown > 0 ? `${tunnelsDown} offline · ${tunnelsDeg} degraded` : 'All tunnels healthy'}
-          color={tunnelsDown > 0 ? '#C8922A' : '#006B3C'}
+          color={tunnelsDown > 0 ? '#C8922A' : '#003C71'}
           spark={sparkUptime}
           icon="⬡"
         />
@@ -247,7 +247,7 @@ export default function Dashboard() {
           label="Open Incidents"
           value={openCount}
           sub={`${criticalCount} critical · ${openCount - criticalCount} warning/info`}
-          color={criticalCount > 0 ? '#BB0000' : openCount > 0 ? '#C8922A' : '#006B3C'}
+          color={criticalCount > 0 ? '#BB0000' : openCount > 0 ? '#C8922A' : '#003C71'}
           spark={sparkLoss}
           icon="⚠"
         />
@@ -264,7 +264,7 @@ export default function Dashboard() {
             label="Assigned to Me"
             value={myOpen}
             sub={`${myIncidents.length} total · ${myIncidents.length - myOpen} resolved`}
-            color={myOpen > 0 ? '#C8922A' : '#006B3C'}
+            color={myOpen > 0 ? '#C8922A' : '#003C71'}
             icon="📋"
           />
         )}
@@ -272,7 +272,7 @@ export default function Dashboard() {
           label="Tunnels Offline"
           value={tunnelsDown}
           sub={tunnelsDown > 0 ? 'Immediate action required' : 'No outages detected'}
-          color={tunnelsDown > 0 ? '#BB0000' : '#006B3C'}
+          color={tunnelsDown > 0 ? '#BB0000' : '#003C71'}
           icon="🔴"
         />
       </div>
@@ -372,7 +372,7 @@ export default function Dashboard() {
               {myIncidents.length === 0 ? (
                 <div style={{ padding: 32, textAlign: 'center' }}>
                   <div style={{ fontSize: 28, marginBottom: 8 }}>✅</div>
-                  <div style={{ fontSize: 13, fontWeight: 600, color: '#006B3C' }}>No incidents assigned to you</div>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: '#003C71' }}>No incidents assigned to you</div>
                   <div style={{ fontSize: 11, color: '#96A89E', marginTop: 4 }}>You're all clear</div>
                 </div>
               ) : (
@@ -387,11 +387,11 @@ export default function Dashboard() {
                                   inc.severity === 'warning'  ? '3px solid #C8922A' : '3px solid #1A5C96',
                       transition: 'background 0.15s',
                     }}
-                    onMouseEnter={e => e.currentTarget.style.background = '#F0FAF4'}
+                    onMouseEnter={e => e.currentTarget.style.background = '#F5F8FA'}
                     onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                   >
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
-                      <div style={{ fontSize: 11, fontFamily: "'Source Code Pro', monospace", color: '#006B3C', fontWeight: 600 }}>
+                      <div style={{ fontSize: 11, fontFamily: "'Source Code Pro', monospace", color: '#003C71', fontWeight: 600 }}>
                         {inc.incident_ref}
                       </div>
                       <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
@@ -423,8 +423,8 @@ export default function Dashboard() {
             <button
               onClick={() => navigate('/incidents')}
               style={{
-                background: '#E8F5EE', border: '1px solid #006B3C50',
-                color: '#006B3C', padding: '5px 14px', borderRadius: 2,
+                background: '#F0F4F8', border: '1px solid #003C7150',
+                color: '#003C71', padding: '5px 14px', borderRadius: 2,
                 fontSize: 11, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit',
               }}
             >View All →</button>
@@ -436,11 +436,11 @@ export default function Dashboard() {
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
-                <tr style={{ background: '#003D22' }}>
+                <tr style={{ background: '#001D38' }}>
                   {['Incident ID', 'Severity', 'Service', 'Description', 'Status', 'Assigned', 'Time'].map(h => (
                     <th key={h} style={{
                       padding: '9px 14px', textAlign: 'left', fontSize: 10.5,
-                      fontWeight: 600, color: '#9ABFAB', letterSpacing: 0.5,
+                      fontWeight: 600, color: '#A2B9CE', letterSpacing: 0.5,
                       textTransform: 'uppercase', borderBottom: '2px solid #C8922A',
                       whiteSpace: 'nowrap',
                     }}>{h}</th>
