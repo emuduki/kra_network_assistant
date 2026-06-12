@@ -11,6 +11,7 @@ export default function Login() {
   const [password, setPassword] = useState('kra2026!');
   const [error,    setError]    = useState('');
   const [loading,  setLoading]  = useState(false);
+  const [hoverBtn, setHoverBtn] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -53,99 +54,219 @@ export default function Login() {
     }
   }
 
+  /* ── styles ─────────────────────────────── */
+  const KRA_RED   = '#C8102E';
+  const KRA_BLACK = '#1A1A1A';
+
   const inputStyle = {
-    width: '100%', padding: '10px 14px', fontSize: 13,
-    border: '1px solid #D8DFE6', borderRadius: 2,
-    background: '#F5F7F5', fontFamily: 'inherit', marginTop: 6,
+    width: '100%', padding: '13px 16px', fontSize: 14,
+    border: '1.5px solid #D4D4D4', borderRadius: 8,
+    background: '#FAFAFA', fontFamily: 'inherit', marginTop: 8,
+    color: KRA_BLACK, outline: 'none',
+    boxSizing: 'border-box',
+    transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
+  };
+
+  const inputFocusHandler = (e) => {
+    e.target.style.borderColor = KRA_RED;
+    e.target.style.boxShadow = `0 0 0 3px ${KRA_RED}18`;
+    e.target.style.background = '#FFFFFF';
+  };
+  const inputBlurHandler = (e) => {
+    e.target.style.borderColor = '#D4D4D4';
+    e.target.style.boxShadow = 'none';
+    e.target.style.background = '#FAFAFA';
   };
 
   return (
     <div style={{
-      minHeight: '100vh', background: '#001D38',
+      minHeight: '100vh',
+      background: '#F0F0F0',
       display: 'flex', alignItems: 'center', justifyContent: 'center',
+      fontFamily: "'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif",
+      padding: 24,
+      position: 'relative',
+      overflow: 'hidden',
     }}>
-      {/* Background pattern */}
-      <div style={{ position: 'absolute', inset: 0, opacity: 0.04,
-        backgroundImage: 'repeating-linear-gradient(0deg,#fff 0,#fff 1px,transparent 1px,transparent 40px),repeating-linear-gradient(90deg,#fff 0,#fff 1px,transparent 1px,transparent 40px)',
+
+      {/* Subtle diagonal pattern */}
+      <div style={{
+        position: 'absolute', inset: 0,
+        backgroundImage: `repeating-linear-gradient(
+          135deg,
+          transparent,
+          transparent 35px,
+          rgba(200,16,46,0.02) 35px,
+          rgba(200,16,46,0.02) 36px
+        )`,
+        pointerEvents: 'none',
       }} />
 
-      <div style={{ position: 'relative', width: '100%', maxWidth: 420, padding: 24 }}>
-        {/* Card */}
+      <div style={{ position: 'relative', width: '100%', maxWidth: 440 }}>
+
+        {/* ── Card ─────────────────────── */}
         <div style={{
-          background: '#FFFFFF', borderRadius: 4,
-          border: '1px solid #D8DFE6', overflow: 'hidden',
-          boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
+          background: '#FFFFFF',
+          borderRadius: 16,
+          overflow: 'hidden',
+          boxShadow: '0 25px 60px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.04)',
         }}>
-          {/* Navy header */}
+
+          {/* Red accent bar at top */}
+          <div style={{ height: 4, background: `linear-gradient(90deg, ${KRA_RED}, #E0243E)` }} />
+
+          {/* ── Logo header ─────────── */}
           <div style={{
-            background: '#003C71', padding: '28px 32px',
-            borderBottom: '3px solid #C8922A', textAlign: 'center',
+            padding: '16px 28px 8px',
+            textAlign: 'center',
           }}>
-            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 14 }}>
-              <KRALogo size={60} />
+            {/* Logo — large */}
+            <div style={{
+              display: 'flex', justifyContent: 'center', marginBottom: 8,
+            }}>
+              <div style={{ transform: 'scale(1.55)', transformOrigin: 'center center' }}>
+                <KRALogo size={160} />
+              </div>
             </div>
-            <div style={{ fontSize: 16, fontWeight: 700, color: '#fff', letterSpacing: 0.3 }}>
-              Kenya Revenue Authority
-            </div>
-            <div style={{ fontSize: 11, color: '#A2B9CE', marginTop: 4, textTransform: 'uppercase', letterSpacing: 0.8 }}>
-              ICT Division · Network Operations Centre
+
+            {/* Title */}
+            <div style={{
+              fontSize: 10.5, fontWeight: 700, color: '#888',
+              textTransform: 'uppercase', letterSpacing: 2.5,
+              marginTop: -30,
+            }}>
+              ICT Network Operations Centre
             </div>
           </div>
 
-          {/* Form */}
-          <form onSubmit={handleSubmit} style={{ padding: '28px 32px' }}>
-            <div style={{ fontSize: 15, fontWeight: 700, color: '#1A2B1F', marginBottom: 20 }}>
-              Sign in to your account
+          {/* Divider */}
+          <div style={{
+            height: 1,
+            background: 'linear-gradient(90deg, transparent, #E0E0E0, transparent)',
+            margin: '0 28px',
+          }} />
+
+          {/* ── Form ─────────────────── */}
+          <form onSubmit={handleSubmit} style={{ padding: '18px 28px 24px' }}>
+            <div style={{
+              fontSize: 16, fontWeight: 800, color: KRA_BLACK,
+              marginBottom: 4,
+            }}>
+              Sign In
+            </div>
+            <div style={{
+              fontSize: 12.5, color: '#707070', marginBottom: 16,
+              lineHeight: 1.4,
+            }}>
+              Enter your KRA staff credentials to continue.
             </div>
 
+            {/* Error */}
             {error && (
               <div style={{
-                background: '#FFF0F0', border: '1px solid #BB0000',
-                borderLeft: '4px solid #BB0000', borderRadius: 2,
-                padding: '10px 14px', fontSize: 12, color: '#BB0000', marginBottom: 16,
+                background: '#FFF0F0',
+                border: `1px solid ${KRA_RED}40`,
+                borderLeft: `4px solid ${KRA_RED}`,
+                borderRadius: 8,
+                padding: '12px 16px',
+                fontSize: 12.5, color: KRA_RED,
+                marginBottom: 20,
+                lineHeight: 1.5,
               }}>
                 {error}
               </div>
             )}
 
-            <label style={{ fontSize: 12, fontWeight: 600, color: '#3D5247', display: 'block', marginBottom: 14 }}>
-              Email Address
+            {/* Staff Number */}
+            <div style={{ marginBottom: 12 }}>
+              <label style={{
+                fontSize: 12, fontWeight: 700, color: KRA_BLACK,
+                display: 'block', letterSpacing: 0.3,
+              }}>
+                Staff Number
+              </label>
               <input
-                type="email" value={email} onChange={e => setEmail(e.target.value)}
-                style={inputStyle} required placeholder="you@kra.go.ke"
+                type="text" value={email}
+                onChange={e => setEmail(e.target.value)}
+                onFocus={inputFocusHandler}
+                onBlur={inputBlurHandler}
+                style={inputStyle}
+                required placeholder="e.g. kariuki@kra.go.ke"
               />
-            </label>
+            </div>
 
-            <label style={{ fontSize: 12, fontWeight: 600, color: '#3D5247', display: 'block', marginBottom: 22 }}>
-              Password
+            {/* Password */}
+            <div style={{ marginBottom: 6 }}>
+              <label style={{
+                fontSize: 12, fontWeight: 700, color: KRA_BLACK,
+                display: 'block', letterSpacing: 0.3,
+              }}>
+                Password
+              </label>
               <input
-                type="password" value={password} onChange={e => setPassword(e.target.value)}
-                style={inputStyle} required placeholder="Enter password"
+                type="password" value={password}
+                onChange={e => setPassword(e.target.value)}
+                onFocus={inputFocusHandler}
+                onBlur={inputBlurHandler}
+                style={inputStyle}
+                required placeholder="Enter your password"
               />
-            </label>
+            </div>
 
+            {/* Forgot */}
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 14 }}>
+              <button type="button" style={{
+                border: 'none', background: 'transparent', color: KRA_RED,
+                fontSize: 12, fontWeight: 700, cursor: 'pointer', padding: '4px 0',
+                textDecoration: 'none',
+              }}>
+                Forgot password?
+              </button>
+            </div>
+
+            {/* Submit */}
             <button
               type="submit"
               disabled={loading}
+              onMouseEnter={() => setHoverBtn(true)}
+              onMouseLeave={() => setHoverBtn(false)}
               style={{
-                width: '100%', padding: '11px', background: loading ? '#96A89E' : '#003C71',
-                border: 'none', borderRadius: 2, color: '#fff',
-                fontSize: 13, fontWeight: 600, letterSpacing: 0.4,
+                width: '100%', padding: '13px 18px',
+                background: loading ? '#999' : KRA_RED,
+                border: 'none', borderRadius: 12, color: '#FFFFFF',
+                fontSize: 14, fontWeight: 800, letterSpacing: 0.5,
                 cursor: loading ? 'not-allowed' : 'pointer',
-                transition: 'background 0.15s',
+                boxShadow: hoverBtn && !loading
+                  ? `0 12px 32px ${KRA_RED}44`
+                  : `0 8px 24px ${KRA_RED}28`,
+                transform: hoverBtn && !loading ? 'translateY(-1px)' : 'translateY(0)',
+                transition: 'all 0.2s ease',
               }}
             >
-              {loading ? 'Signing in...' : 'Sign In'}
+              {loading ? 'Signing in…' : 'Sign In'}
             </button>
 
-            <div style={{ marginTop: 16, fontSize: 11, color: '#96A89E', textAlign: 'center' }}>
-              This system is for authorised KRA ICT staff only.<br />
-              Unauthorised access is a violation of KRA ICT Policy.
+            {/* Policy notice */}
+            <div style={{
+              marginTop: 14,
+              padding: '8px 14px',
+              background: '#F7F7F7',
+              borderRadius: 10,
+              textAlign: 'center',
+            }}>
+              <div style={{ fontSize: 11.5, color: '#888', lineHeight: 1.6 }}>
+                This system is for <strong style={{ color: KRA_BLACK }}>authorised KRA ICT staff</strong> only.
+                <br />Unauthorised access is a violation of KRA ICT Policy.
+              </div>
             </div>
           </form>
         </div>
 
-        <div style={{ textAlign: 'center', marginTop: 16, fontSize: 11, color: '#5E8AB4' }}>
+        {/* ── Footer ─────────────────── */}
+        <div style={{
+          textAlign: 'center', marginTop: 24,
+          fontSize: 11, color: '#1A1A1A', letterSpacing: 0.2,
+        }}>
           © Kenya Revenue Authority {new Date().getFullYear()} · AI Network Incident Diagnostics
         </div>
       </div>

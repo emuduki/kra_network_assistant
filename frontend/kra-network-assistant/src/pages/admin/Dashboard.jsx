@@ -50,15 +50,15 @@ function IncidentRow({ inc, ismine, onClick, isLast }) {
       style={{
         cursor: 'pointer',
         background: ismine ? '#F5F8FA' : 'transparent',
-        borderLeft: ismine ? '3px solid #003C71' : '3px solid transparent',
+        borderLeft: ismine ? '3px solid #C8102E' : '3px solid transparent',
         transition: 'background 0.15s',
       }}
       onMouseEnter={e => e.currentTarget.style.background = ismine ? '#F0F4F8' : '#F5F7F5'}
       onMouseLeave={e => e.currentTarget.style.background = ismine ? '#F5F8FA' : 'transparent'}
     >
-      <td style={{ padding: '9px 14px', fontFamily: "'Source Code Pro', monospace", fontSize: 11, color: '#003C71', fontWeight: 600, borderBottom: isLast ? 'none' : '1px solid #EAEEF0' }}>
+      <td style={{ padding: '9px 14px', fontFamily: "'Source Code Pro', monospace", fontSize: 11, color: '#1A1A1A', fontWeight: 600, borderBottom: isLast ? 'none' : '1px solid #EAEEF0' }}>
         {inc.incident_ref}
-        {ismine && <span style={{ marginLeft: 6, fontSize: 9, background: '#003C71', color: 'white', padding: '1px 5px', borderRadius: 2, fontWeight: 700 }}>MINE</span>}
+        {ismine && <span style={{ marginLeft: 6, fontSize: 9, background: '#C8102E', color: 'white', padding: '1px 5px', borderRadius: 2, fontWeight: 700 }}>MINE</span>}
       </td>
       <td style={{ padding: '9px 14px', borderBottom: isLast ? 'none' : '1px solid #EAEEF0' }}>
         <Badge status={inc.severity} />
@@ -171,8 +171,8 @@ export default function Dashboard() {
         <button
           onClick={fetchAll}
           style={{
-            background: '#F0F4F8', border: '1px solid #003C7150',
-            color: '#003C71', padding: '6px 14px', borderRadius: 2,
+            background: '#F5F5F5', border: '1px solid #C8102E50',
+            color: '#C8102E', padding: '6px 14px', borderRadius: 2,
             fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit',
           }}
         >⟳ Refresh</button>
@@ -209,25 +209,25 @@ export default function Dashboard() {
       {/* ── ICT Officer: My work summary strip ── */}
       {!isAdmin && (
         <div style={{
-          background: '#003C71', borderRadius: 3, padding: '12px 20px',
+          background: '#1A1A1A', borderRadius: 3, padding: '12px 20px',
           marginBottom: 18, display: 'flex', alignItems: 'center', gap: 24,
           boxShadow: '0 2px 6px rgba(0,40,80,0.15)',
         }}>
-          <div style={{ color: '#A2B9CE', fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.6 }}>
+          <div style={{ color: '#CCCCCC', fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.6 }}>
             My Work Summary
           </div>
           {[
             { label: 'Assigned to me',  value: myIncidents.length, color: 'white' },
-            { label: 'Still open',       value: myOpen,             color: myOpen > 0 ? '#FFC4C4' : '#A2B9CE' },
+            { label: 'Still open',       value: myOpen,             color: myOpen > 0 ? '#FFC4C4' : '#CCCCCC' },
             { label: 'Resolved',         value: myIncidents.length - myOpen, color: '#86EFAC' },
           ].map((s, i) => (
             <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <div style={{ fontSize: 22, fontWeight: 700, color: s.color }}>{s.value}</div>
-              <div style={{ fontSize: 11, color: '#A2B9CE' }}>{s.label}</div>
+              <div style={{ fontSize: 11, color: '#CCCCCC' }}>{s.label}</div>
               {i < 2 && <div style={{ width: 1, height: 24, background: '#002D54', marginLeft: 14 }} />}
             </div>
           ))}
-          <div style={{ marginLeft: 'auto', fontSize: 11, color: '#5E8AB4' }}>
+          <div style={{ marginLeft: 'auto', fontSize: 11, color: '#888888' }}>
             Auto-refreshes every 30s
           </div>
         </div>
@@ -239,7 +239,7 @@ export default function Dashboard() {
           label="Active VPN Tunnels"
           value={`${tunnelsUp} / ${tunnels.length}`}
           sub={tunnelsDown > 0 ? `${tunnelsDown} offline · ${tunnelsDeg} degraded` : 'All tunnels healthy'}
-          color={tunnelsDown > 0 ? '#C8922A' : '#003C71'}
+          color={tunnelsDown > 0 ? '#C8102E' : '#1A1A1A'}
           spark={sparkUptime}
           icon="⬡"
         />
@@ -247,7 +247,7 @@ export default function Dashboard() {
           label="Open Incidents"
           value={openCount}
           sub={`${criticalCount} critical · ${openCount - criticalCount} warning/info`}
-          color={criticalCount > 0 ? '#BB0000' : openCount > 0 ? '#C8922A' : '#003C71'}
+          color={criticalCount > 0 ? '#BB0000' : openCount > 0 ? '#C8102E' : '#1A1A1A'}
           spark={sparkLoss}
           icon="⚠"
         />
@@ -256,7 +256,7 @@ export default function Dashboard() {
             label="Unassigned Incidents"
             value={incidents.filter(i => !i.assigned_to && i.status === 'Open').length}
             sub="Require assignment"
-            color="#C8922A"
+            color="#C8102E"
             icon="👤"
           />
         ) : (
@@ -264,7 +264,7 @@ export default function Dashboard() {
             label="Assigned to Me"
             value={myOpen}
             sub={`${myIncidents.length} total · ${myIncidents.length - myOpen} resolved`}
-            color={myOpen > 0 ? '#C8922A' : '#003C71'}
+            color={myOpen > 0 ? '#C8102E' : '#1A1A1A'}
             icon="📋"
           />
         )}
@@ -272,7 +272,7 @@ export default function Dashboard() {
           label="Tunnels Offline"
           value={tunnelsDown}
           sub={tunnelsDown > 0 ? 'Immediate action required' : 'No outages detected'}
-          color={tunnelsDown > 0 ? '#BB0000' : '#003C71'}
+          color={tunnelsDown > 0 ? '#BB0000' : '#1A1A1A'}
           icon="🔴"
         />
       </div>
@@ -333,7 +333,7 @@ export default function Dashboard() {
             <div style={{ padding: '20px 18px' }}>
               {[
                 { label: 'Critical', count: incidents.filter(i => i.severity === 'critical').length, color: '#BB0000', bg: '#FFF0F0' },
-                { label: 'Warning',  count: incidents.filter(i => i.severity === 'warning').length,  color: '#C8922A', bg: '#FEF6E7' },
+                { label: 'Warning',  count: incidents.filter(i => i.severity === 'warning').length,  color: '#C8102E', bg: '#FFF0F0' },
                 { label: 'Info',     count: incidents.filter(i => i.severity === 'info').length,     color: '#1A5C96', bg: '#EBF3FB' },
               ].map((s, i) => (
                 <div key={i} style={{ marginBottom: 18 }}>
@@ -372,7 +372,7 @@ export default function Dashboard() {
               {myIncidents.length === 0 ? (
                 <div style={{ padding: 32, textAlign: 'center' }}>
                   <div style={{ fontSize: 28, marginBottom: 8 }}>✅</div>
-                  <div style={{ fontSize: 13, fontWeight: 600, color: '#003C71' }}>No incidents assigned to you</div>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: '#1A1A1A' }}>No incidents assigned to you</div>
                   <div style={{ fontSize: 11, color: '#96A89E', marginTop: 4 }}>You're all clear</div>
                 </div>
               ) : (
@@ -384,14 +384,14 @@ export default function Dashboard() {
                       padding: '12px 16px', cursor: 'pointer',
                       borderBottom: i < myIncidents.length - 1 ? '1px solid #EAEEF0' : 'none',
                       borderLeft: inc.severity === 'critical' ? '3px solid #BB0000' :
-                                  inc.severity === 'warning'  ? '3px solid #C8922A' : '3px solid #1A5C96',
+                                  inc.severity === 'warning'  ? '3px solid #C8102E' : '3px solid #1A5C96',
                       transition: 'background 0.15s',
                     }}
                     onMouseEnter={e => e.currentTarget.style.background = '#F5F8FA'}
                     onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                   >
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
-                      <div style={{ fontSize: 11, fontFamily: "'Source Code Pro', monospace", color: '#003C71', fontWeight: 600 }}>
+                      <div style={{ fontSize: 11, fontFamily: "'Source Code Pro', monospace", color: '#1A1A1A', fontWeight: 600 }}>
                         {inc.incident_ref}
                       </div>
                       <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
@@ -399,7 +399,7 @@ export default function Dashboard() {
                         <span style={{
                           padding: '2px 7px', borderRadius: 2, fontSize: 10.5, fontWeight: 600,
                           background: inc.status === 'Open' ? '#FFF0F0' : '#FEF6E7',
-                          color:      inc.status === 'Open' ? '#BB0000' : '#C8922A',
+                          color:      inc.status === 'Open' ? '#BB0000' : '#C8102E',
                         }}>{inc.status}</span>
                       </div>
                     </div>
@@ -423,8 +423,8 @@ export default function Dashboard() {
             <button
               onClick={() => navigate('/incidents')}
               style={{
-                background: '#F0F4F8', border: '1px solid #003C7150',
-                color: '#003C71', padding: '5px 14px', borderRadius: 2,
+                background: '#F5F5F5', border: '1px solid #C8102E50',
+                color: '#C8102E', padding: '5px 14px', borderRadius: 2,
                 fontSize: 11, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit',
               }}
             >View All →</button>
@@ -436,12 +436,12 @@ export default function Dashboard() {
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
-                <tr style={{ background: '#001D38' }}>
+                <tr style={{ background: '#1A1A1A' }}>
                   {['Incident ID', 'Severity', 'Service', 'Description', 'Status', 'Assigned', 'Time'].map(h => (
                     <th key={h} style={{
                       padding: '9px 14px', textAlign: 'left', fontSize: 10.5,
-                      fontWeight: 600, color: '#A2B9CE', letterSpacing: 0.5,
-                      textTransform: 'uppercase', borderBottom: '2px solid #C8922A',
+                      fontWeight: 600, color: '#CCCCCC', letterSpacing: 0.5,
+                      textTransform: 'uppercase', borderBottom: '2px solid #C8102E',
                       whiteSpace: 'nowrap',
                     }}>{h}</th>
                   ))}

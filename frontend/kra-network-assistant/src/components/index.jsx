@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 // Badge
 export function Badge({ status, label }) {
     const map = {
@@ -60,53 +62,32 @@ export function CardHeader({ title, subtitle, action }) {
     );
 }
 
-// KRA Logo SVG - Redesigned to official brand crest
+// KRA Logo — prefer a user-provided `/logo.png` in the public folder, fall back to `logo192.png` and favicon
 export function KRALogo({ size = 48 }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      {/* Circular Badge Background */}
-      <circle cx="50" cy="50" r="46" fill="#003C71" stroke="#C8922A" strokeWidth="3" />
-      
-      {/* Outer Gold Accent Ring */}
-      <circle cx="50" cy="50" r="41" stroke="#C8922A" strokeWidth="0.8" strokeDasharray="3 3" opacity="0.6" />
-      
-      {/* Crossed Spears (Maasai Spears) */}
-      {/* Spear 1 (Top Left to Bottom Right) */}
-      <line x1="24" y1="24" x2="76" y2="76" stroke="#C6CFD6" strokeWidth="2" strokeLinecap="round" />
-      <polygon points="72,70 77,77 70,72" fill="#C6CFD6" />
-      <polygon points="28,30 23,23 30,28" fill="#C6CFD6" />
-      {/* Spear 2 (Top Right to Bottom Left) */}
-      <line x1="76" y1="24" x2="24" y2="76" stroke="#C6CFD6" strokeWidth="2" strokeLinecap="round" />
-      <polygon points="28,70 23,77 30,72" fill="#C6CFD6" />
-      <polygon points="72,30 77,23 70,28" fill="#C6CFD6" />
+  const publicPng = (process.env.PUBLIC_URL || '') + '/logo.png';
+  const fallbackPublic = (process.env.PUBLIC_URL || '') + '/logo192.png';
+  const finalFallback = (process.env.PUBLIC_URL || '') + '/favicon.ico';
+  const [src, setSrc] = useState(publicPng);
+  const style = { width: size, height: size, display: 'inline-block', objectFit: 'contain' };
 
-      {/* Traditional Shield in the Center */}
-      <g>
-        {/* Shield Outer Shadow / Border */}
-        <path d="M50 20 C70 25 70 58 50 78 C30 58 30 25 50 20 Z" fill="#1A2B1F" />
-        
-        {/* Shield background stripes (Kenyan Flag colors) */}
-        {/* Left: Black */}
-        <path d="M50 21.5 C32 26.5 32 56.5 50 76.5 Z" fill="#000000" />
-        {/* Right: Green */}
-        <path d="M50 21.5 C68 26.5 68 56.5 50 76.5 Z" fill="#00843D" />
-        
-        {/* Center: Red Stripe */}
-        <path d="M44 22 C44 22 47 50 44 75 L56 75 C53 50 56 22 56 22 Z" fill="#BB0000" />
-        
-        {/* White thin dividers */}
-        <path d="M44 22 C44 22 47 50 44 75" stroke="#FFFFFF" strokeWidth="1" />
-        <path d="M56 22 C56 22 53 50 56 75" stroke="#FFFFFF" strokeWidth="1" />
-        
-        {/* Shield Center Ornament (Cockerel / White symbol) */}
-        <circle cx="50" cy="46" r="3.5" fill="#FFFFFF" />
-        <path d="M50 41 L53 48 L47 48 Z" fill="#FFFFFF" />
-      </g>
-      
-      {/* Text Badge at the bottom */}
-      <rect x="28" y="76" width="44" height="14" rx="3" fill="#BB0000" stroke="#C8922A" strokeWidth="1.5" />
-      <text x="50" y="86.5" textAnchor="middle" fill="#FFFFFF" fontSize="9" fontWeight="900" fontFamily="var(--font-main)" letterSpacing="1">KRA</text>
-    </svg>
+  function handleError(e) {
+    const current = e?.target?.src || '';
+    if (current && current.indexOf('/logo.png') !== -1) {
+      // first fallback -> public 192
+      setSrc(fallbackPublic);
+      return;
+    }
+    if (current && current.indexOf('logo192.png') !== -1) {
+      // final fallback -> favicon
+      setSrc(finalFallback);
+      return;
+    }
+    // last resort: clear src
+    setSrc('');
+  }
+
+  return (
+    <img src={src} alt="KRA logo" style={style} onError={handleError} />
   );
 }
 

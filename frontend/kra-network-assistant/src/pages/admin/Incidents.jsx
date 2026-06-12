@@ -115,7 +115,7 @@ export default function Incidents() {
       <PageHeader title="Incident Management" breadcrumb="Incidents">
         {isAdmin && (
           <button onClick={() => setShowCreate(!showCreate)} style={{
-            background: '#003C71', border: 'none', color: 'white',
+            background: '#C8102E', border: 'none', color: 'white',
             padding: '7px 16px', borderRadius: 2, fontSize: 12,
             fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit',
           }}>+ New Incident</button>
@@ -124,7 +124,7 @@ export default function Incidents() {
 
       {/* ── Create form (admin only) ── */}
       {showCreate && (
-        <Card style={{ marginBottom: 16, borderLeft: '4px solid #003C71' }}>
+        <Card style={{ marginBottom: 16, borderLeft: '4px solid #C8102E' }}>
           <CardHeader title="Create New Incident" />
           <form onSubmit={handleCreate} style={{ padding: 18 }}>
             {createError && (
@@ -158,7 +158,7 @@ export default function Incidents() {
             </label>
             <div style={{ display: 'flex', gap: 10 }}>
               <button type="submit" disabled={createLoading} style={{
-                background: createLoading ? '#96A89E' : '#003C71', border: 'none',
+                background: createLoading ? '#96A89E' : '#C8102E', border: 'none',
                 color: 'white', padding: '8px 20px', borderRadius: 2,
                 fontSize: 12, fontWeight: 600, cursor: createLoading ? 'not-allowed' : 'pointer', fontFamily: 'inherit',
               }}>{createLoading ? 'Creating...' : 'Create Incident'}</button>
@@ -173,7 +173,7 @@ export default function Incidents() {
 
       {/* ── Selected incident detail ── */}
       {selectedIncident && (
-        <Card style={{ marginBottom: 16, borderLeft: `4px solid ${selectedIncident.severity === 'critical' ? '#BB0000' : selectedIncident.severity === 'warning' ? '#C8922A' : '#1A5C96'}` }}>
+        <Card style={{ marginBottom: 16, borderLeft: `4px solid ${selectedIncident.severity === 'critical' ? '#BB0000' : selectedIncident.severity === 'warning' ? '#C8102E' : '#1A5C96'}` }}>
           <div style={{ padding: '14px 18px', background: '#F5F8FA', borderBottom: '1px solid #D8DFE6', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
               <div style={{ fontSize: 10, color: '#96A89E', fontFamily: "'Source Code Pro', monospace" }}>{selectedIncident.incident_ref}</div>
@@ -203,7 +203,7 @@ export default function Incidents() {
           {selectedIncident.ai_diagnosis && (
             <div style={{ padding: '0 18px 14px' }}>
               <div style={{ fontSize: 10, color: '#96A89E', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 4 }}>AI Diagnosis</div>
-              <div style={{ fontSize: 12, color: '#3D5247', lineHeight: 1.6, background: '#F5F8FA', padding: '10px 14px', borderRadius: 2, border: '1px solid #003C7130', fontFamily: "'Source Code Pro', monospace" }}>
+              <div style={{ fontSize: 12, color: '#3D5247', lineHeight: 1.6, background: '#F5F8FA', padding: '10px 14px', borderRadius: 2, border: '1px solid #C8102E30', fontFamily: "'Source Code Pro', monospace" }}>
                 {typeof selectedIncident.ai_diagnosis === 'string'
                   ? selectedIncident.ai_diagnosis
                   : JSON.stringify(selectedIncident.ai_diagnosis, null, 2)}
@@ -217,8 +217,8 @@ export default function Incidents() {
                   <button key={s} onClick={() => handleStatusChange(selectedIncident, s)}
                     disabled={selectedIncident.status === s || updating === selectedIncident.id}
                     style={{
-                      background: selectedIncident.status === s ? '#003C71' : '#F0F4F8',
-                      border: '1px solid #003C7150', color: selectedIncident.status === s ? 'white' : '#003C71',
+                      background: selectedIncident.status === s ? '#C8102E' : '#F5F5F5',
+                      border: '1px solid #C8102E50', color: selectedIncident.status === s ? 'white' : '#C8102E',
                       padding: '6px 14px', borderRadius: 2, fontSize: 11, fontWeight: 600,
                       cursor: selectedIncident.status === s ? 'default' : 'pointer', fontFamily: 'inherit',
                     }}>
@@ -249,9 +249,9 @@ export default function Incidents() {
               <button key={s} onClick={() => setFilterStatus(s)} style={{
                 padding: '5px 12px', borderRadius: 2, fontSize: 11, fontWeight: 600,
                 cursor: 'pointer', fontFamily: 'inherit', border: '1px solid',
-                background: filterStatus === s ? '#003C71' : '#F5F7F5',
+                background: filterStatus === s ? '#C8102E' : '#F5F7F5',
                 color: filterStatus === s ? 'white' : '#6B7C72',
-                borderColor: filterStatus === s ? '#003C71' : '#D8DFE6',
+                borderColor: filterStatus === s ? '#C8102E' : '#D8DFE6',
               }}>{s}</button>
             ))}
           </div>
@@ -260,9 +260,9 @@ export default function Incidents() {
               <button key={s} onClick={() => setFilterSeverity(s)} style={{
                 padding: '5px 12px', borderRadius: 2, fontSize: 11, fontWeight: 600,
                 cursor: 'pointer', fontFamily: 'inherit', border: '1px solid',
-                background: filterSeverity === s ? '#001D38' : '#F5F7F5',
+                background: filterSeverity === s ? '#1A1A1A' : '#F5F7F5',
                 color: filterSeverity === s ? 'white' : '#6B7C72',
-                borderColor: filterSeverity === s ? '#001D38' : '#D8DFE6',
+                borderColor: filterSeverity === s ? '#1A1A1A' : '#D8DFE6',
               }}>{s === 'All' ? 'All Severity' : s.charAt(0).toUpperCase() + s.slice(1)}</button>
             ))}
           </div>
@@ -270,7 +270,7 @@ export default function Incidents() {
             {filtered.length} of {incidents.length} incidents
           </span>
           <button onClick={fetchIncidents} style={{
-            background: '#F0F4F8', border: '1px solid #003C7150', color: '#003C71',
+            background: '#F5F5F5', border: '1px solid #C8102E50', color: '#C8102E',
             padding: '5px 12px', borderRadius: 2, fontSize: 11, fontWeight: 600,
             cursor: 'pointer', fontFamily: 'inherit',
           }}>⟳ Refresh</button>
@@ -284,9 +284,9 @@ export default function Incidents() {
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
-                <tr style={{ background: '#001D38' }}>
+                <tr style={{ background: '#1A1A1A' }}>
                   {['Incident ID', 'Severity', 'Service', 'Description', 'Assigned To', 'Status', 'Time', 'Actions'].map(h => (
-                    <th key={h} style={{ padding: '9px 14px', textAlign: 'left', fontSize: 10.5, fontWeight: 600, color: '#A2B9CE', letterSpacing: 0.5, textTransform: 'uppercase', borderBottom: '2px solid #C8922A', whiteSpace: 'nowrap' }}>{h}</th>
+                    <th key={h} style={{ padding: '9px 14px', textAlign: 'left', fontSize: 10.5, fontWeight: 600, color: '#CCCCCC', letterSpacing: 0.5, textTransform: 'uppercase', borderBottom: '2px solid #C8102E', whiteSpace: 'nowrap' }}>{h}</th>
                   ))}
                 </tr>
               </thead>
@@ -303,14 +303,14 @@ export default function Incidents() {
                       style={{
                         background: isSelected ? '#F0F4F8' : ismine ? '#F5F8FA' : i % 2 === 0 ? '#FFFFFF' : '#F5F7F5',
                         cursor: 'pointer', transition: 'background 0.15s',
-                        borderLeft: isSelected ? '3px solid #003C71' : ismine ? '3px solid #003C7160' : '3px solid transparent',
+                        borderLeft: isSelected ? '3px solid #C8102E' : ismine ? '3px solid #C8102E60' : '3px solid transparent',
                       }}
                       onMouseEnter={e => { if (!isSelected) e.currentTarget.style.background = '#F5F8FA'; }}
                       onMouseLeave={e => { if (!isSelected) e.currentTarget.style.background = ismine ? '#F5F8FA' : i % 2 === 0 ? '#FFFFFF' : '#F5F7F5'; }}
                     >
-                      <td style={{ padding: '10px 14px', fontFamily: "'Source Code Pro', monospace", fontSize: 11, color: '#003C71', fontWeight: 600, borderBottom: '1px solid #EAEEF0' }}>
+                      <td style={{ padding: '10px 14px', fontFamily: "'Source Code Pro', monospace", fontSize: 11, color: '#1A1A1A', fontWeight: 600, borderBottom: '1px solid #EAEEF0' }}>
                         {inc.incident_ref}
-                        {ismine && <span style={{ marginLeft: 5, fontSize: 9, background: '#003C71', color: 'white', padding: '1px 5px', borderRadius: 2, fontWeight: 700 }}>MINE</span>}
+                        {ismine && <span style={{ marginLeft: 5, fontSize: 9, background: '#C8102E', color: 'white', padding: '1px 5px', borderRadius: 2, fontWeight: 700 }}>MINE</span>}
                       </td>
                       <td style={{ padding: '10px 14px', borderBottom: '1px solid #EAEEF0' }}><Badge status={inc.severity} /></td>
                       <td style={{ padding: '10px 14px', fontSize: 12, fontWeight: 600, borderBottom: '1px solid #EAEEF0' }}>{inc.service}</td>
@@ -341,7 +341,7 @@ export default function Incidents() {
                           <span style={{
                             padding: '2px 8px', borderRadius: 2, fontSize: 11, fontWeight: 600,
                             background: inc.status === 'Open' ? '#FFF0F0' : inc.status === 'In Progress' ? '#FEF6E7' : '#E8F5EE',
-                            color: inc.status === 'Open' ? '#BB0000' : inc.status === 'In Progress' ? '#C8922A' : '#00843D',
+                            color: inc.status === 'Open' ? '#BB0000' : inc.status === 'In Progress' ? '#C8102E' : '#00843D',
                           }}>{inc.status}</span>
                         )}
                       </td>

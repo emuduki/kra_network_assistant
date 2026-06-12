@@ -26,8 +26,8 @@ function TopologyMap({ tunnels }) {
   const edges = [['hq','gw'],['gw','itax'],['gw','customs'],['gw','mail'],['gw','payroll'],['itax','msa'],['payroll','hqbb'],['gw','dns']];
 
   function nodeStyle(s) {
-    if (s === 'up')      return { fill: '#F0F4F8', stroke: '#003C71', text: '#001D38' };
-    if (s === 'degraded') return { fill: '#FEF6E7', stroke: '#C8922A', text: '#C8922A' };
+    if (s === 'up')      return { fill: '#F5F5F5', stroke: '#1A1A1A', text: '#1A1A1A' };
+    if (s === 'degraded') return { fill: '#FFF0F0', stroke: '#C8102E', text: '#C8102E' };
     if (s === 'down')    return { fill: '#FFF0F0', stroke: '#BB0000', text: '#BB0000' };
     return { fill: '#F5F7F5', stroke: '#96A89E', text: '#6B7C72' };
   }
@@ -36,8 +36,8 @@ function TopologyMap({ tunnels }) {
     const fn = nodes.find(n => n.id === a), tn = nodes.find(n => n.id === b);
     if (!fn || !tn) return '#D8DFE6';
     if (fn.status === 'down'     || tn.status === 'down')     return '#BB0000';
-    if (fn.status === 'degraded' || tn.status === 'degraded') return '#C8922A';
-    return '#003C71';
+    if (fn.status === 'degraded' || tn.status === 'degraded') return '#C8102E';
+    return '#1A1A1A';
   }
 
   function handleNodeClick(node) {
@@ -60,7 +60,7 @@ function TopologyMap({ tunnels }) {
       {edges.map(([a, b], i) => {
         const fn = nodes.find(n => n.id === a), tn = nodes.find(n => n.id === b);
         const col = edgeColor(a, b);
-        const dash = col === '#BB0000' ? '6,4' : col === '#C8922A' ? '5,3' : 'none';
+        const dash = col === '#BB0000' ? '6,4' : col === '#C8102E' ? '5,3' : 'none';
         return <line key={i} x1={fn.x} y1={fn.y+24} x2={tn.x} y2={tn.y-24} stroke={col} strokeWidth={1.5} strokeDasharray={dash} opacity={0.7} />;
       })}
 
@@ -83,7 +83,7 @@ function TopologyMap({ tunnels }) {
 
       {/* Legend */}
       <rect x="10" y="490" width="290" height="22" rx="2" fill="white" stroke="#D8DFE6" strokeWidth="0.5" opacity="0.9" />
-      {[{ col: '#003C71', label: 'Active' }, { col: '#C8922A', label: 'Degraded' }, { col: '#BB0000', label: 'Offline — click to diagnose' }].map((l, i) => (
+      {[{ col: '#1A1A1A', label: 'Active' }, { col: '#C8102E', label: 'Degraded' }, { col: '#BB0000', label: 'Offline — click to diagnose' }].map((l, i) => (
         <g key={i} transform={`translate(${18 + i * 92}, 497)`}>
           <circle cx={5} cy={5} r={4} fill={l.col} />
           <text x={13} y={9} fontFamily="'Source Sans Pro', sans-serif" fontSize={9.5} fill="#6B7C72">{l.label}</text>
@@ -121,8 +121,8 @@ export default function Topology() {
       </Card>
       <div style={{ marginTop: 14, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
         {[
-          { label: 'Healthy Links',   count: tunnels.filter(t => t.status === 'up').length,       color: '#003C71', bg: '#F0F4F8' },
-          { label: 'Degraded Links',  count: tunnels.filter(t => t.status === 'degraded').length,  color: '#C8922A', bg: '#FEF6E7' },
+          { label: 'Healthy Links',   count: tunnels.filter(t => t.status === 'up').length,       color: '#1A1A1A', bg: '#F5F5F5' },
+          { label: 'Degraded Links',  count: tunnels.filter(t => t.status === 'degraded').length,  color: '#C8102E', bg: '#FFF0F0' },
           { label: 'Offline Links',   count: tunnels.filter(t => t.status === 'down').length,      color: '#BB0000', bg: '#FFF0F0' },
         ].map((s, i) => (
           <div key={i} style={{ background: s.bg, border: `1px solid ${s.color}30`, borderRadius: 3, padding: '10px 16px', display: 'flex', alignItems: 'center', gap: 12 }}>

@@ -31,23 +31,23 @@ function IssueCard({ issue, onCreateIncident }) {
         <span style={{ fontSize: 10.5, padding: '2px 9px', background: `${color}15`, color, borderRadius: 2, fontWeight: 700, letterSpacing: 0.5 }}>{issue.type}</span>
         {issue.confidence && <span style={{ fontSize: 11, color: '#96A89E' }}>Confidence: <strong style={{ color: '#1A2B1F' }}>{issue.confidence}%</strong></span>}
         <button onClick={() => onCreateIncident(issue)} style={{
-          marginLeft: 'auto', background: '#F0F4F8', border: '1px solid #003C7150',
-          color: '#003C71', padding: '4px 12px', borderRadius: 2,
+          marginLeft: 'auto', background: '#F5F5F5', border: '1px solid #C8102E50',
+          color: '#C8102E', padding: '4px 12px', borderRadius: 2,
           fontSize: 11, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit',
         }}>+ Create Incident</button>
       </div>
       {[
         { label: 'Description',        val: issue.description, color: '#1A2B1F' },
         { label: 'Root Cause',         val: issue.rootCause,   color: '#1A2B1F' },
-        { label: 'Impact',             val: issue.impact,      color: '#C8922A' },
-        { label: 'Recommended Action', val: issue.fix,         color: '#003C71', mono: true },
+        { label: 'Impact',             val: issue.impact,      color: '#C8102E' },
+        { label: 'Recommended Action', val: issue.fix,         color: '#1A1A1A', mono: true },
       ].filter(f => f.val).map((f, i) => (
         <div key={i} style={{ marginBottom: i < 3 ? 10 : 0 }}>
           <div style={{ fontSize: 10, color: '#96A89E', fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.6, marginBottom: 3 }}>{f.label}</div>
           <div style={{
             fontSize: 12.5, color: f.color, lineHeight: 1.6,
             fontFamily: f.mono ? "'Source Code Pro', monospace" : 'inherit',
-            borderLeft: f.mono ? '2px solid #003C71' : 'none',
+            borderLeft: f.mono ? '2px solid #C8102E' : 'none',
             paddingLeft: f.mono ? 10 : 0,
             background: f.mono ? '#F5F8FA' : 'transparent',
             padding: f.mono ? '6px 10px' : '0',
@@ -95,7 +95,7 @@ export default function Diagnostics() {
   }
 
   const taStyle = {
-    width: '100%', height: 200, background: '#0D1B0F', border: '1px solid #003C71',
+    width: '100%', height: 200, background: '#0D0D0D', border: '1px solid #333333',
     borderRadius: 2, color: '#86EFAC', fontFamily: "'Source Code Pro', 'Courier New', monospace",
     fontSize: 11, padding: 14, resize: 'vertical', lineHeight: 1.8,
   };
@@ -113,7 +113,7 @@ export default function Diagnostics() {
         <Card>
           <CardHeader title="Router / Firewall Log" subtitle="Paste syslog, charon, or iptables output"
             action={
-              <button onClick={() => setLogText(SAMPLE_LOG)} style={{ background: '#F0F4F8', border: '1px solid #003C7150', color: '#003C71', padding: '3px 10px', borderRadius: 2, fontSize: 10.5, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>
+              <button onClick={() => setLogText(SAMPLE_LOG)} style={{ background: '#F5F5F5', border: '1px solid #C8102E50', color: '#C8102E', padding: '3px 10px', borderRadius: 2, fontSize: 10.5, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>
                 Load Sample
               </button>
             }
@@ -127,7 +127,7 @@ export default function Diagnostics() {
         <Card>
           <CardHeader title="Traceroute Output" subtitle="Optional — paste traceroute for path analysis"
             action={
-              <button onClick={() => setTraceText(SAMPLE_TRACE)} style={{ background: '#F0F4F8', border: '1px solid #003C7150', color: '#003C71', padding: '3px 10px', borderRadius: 2, fontSize: 10.5, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>
+              <button onClick={() => setTraceText(SAMPLE_TRACE)} style={{ background: '#F5F5F5', border: '1px solid #C8102E50', color: '#C8102E', padding: '3px 10px', borderRadius: 2, fontSize: 10.5, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>
                 Load Sample
               </button>
             }
@@ -142,7 +142,7 @@ export default function Diagnostics() {
 
       <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
         <button onClick={analyze} disabled={loading} style={{
-          background: loading ? '#96A89E' : '#003C71', border: 'none', color: 'white',
+          background: loading ? '#96A89E' : '#C8102E', border: 'none', color: 'white',
           padding: '11px 28px', borderRadius: 2, fontSize: 13, fontWeight: 600,
           letterSpacing: 0.4, cursor: loading ? 'not-allowed' : 'pointer',
           fontFamily: 'inherit', display: 'flex', alignItems: 'center', gap: 8,
@@ -160,7 +160,7 @@ export default function Diagnostics() {
 
       {/* Results */}
       {result && (
-        <Card style={{ borderLeft: `4px solid ${result.severity === 'critical' ? '#BB0000' : result.severity === 'warning' ? '#C8922A' : '#1A5C96'}` }}>
+        <Card style={{ borderLeft: `4px solid ${result.severity === 'critical' ? '#BB0000' : result.severity === 'warning' ? '#C8102E' : '#1A5C96'}` }}>
           <div style={{ padding: '14px 18px', background: result.severity === 'critical' ? '#FFF0F0' : result.severity === 'warning' ? '#FEF6E7' : '#EBF3FB', borderBottom: '1px solid #D8DFE6', display: 'flex', alignItems: 'center', gap: 12 }}>
             <Badge status={result.severity} />
             <span style={{ fontSize: 13, color: '#3D5247', fontWeight: 500 }}>{result.summary}</span>

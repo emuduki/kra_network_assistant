@@ -61,14 +61,14 @@ function AppLayout({ children }) {
       </main>
       {/* Footer */}
       <div style={{
-        background: '#003D22', padding: '10px 24px',
+        background: '#1A1A1A', padding: '10px 24px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        borderTop: '3px solid #C8922A',
+        borderTop: '3px solid #C8102E',
       }}>
-        <span style={{ fontSize: 11, color: '#4a7c59' }}>
+        <span style={{ fontSize: 11, color: '#AAAAAA' }}>
           © Kenya Revenue Authority {new Date().getFullYear()} · ICT Division · NOC
         </span>
-        <span style={{ fontSize: 11, color: '#4a7c59' }}>www.kra.go.ke</span>
+        <span style={{ fontSize: 11, color: '#AAAAAA' }}>www.kra.go.ke</span>
       </div>
     </div>
   );
