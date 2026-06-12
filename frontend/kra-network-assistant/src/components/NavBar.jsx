@@ -75,14 +75,14 @@ export default function NavBar() {
       <div style={{
         background: '#FFFFFF', borderBottom: '3px solid #C8102E',
         padding: '0 24px', display: 'flex', alignItems: 'center',
-        gap: 20, height: 76,
+        gap: 8, height: 76,
         boxShadow: '0 2px 6px rgba(0,40,80,0.1)',
       }}>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div style={{ display: 'flex', alignItems: 'center', marginTop: 6 }}>
           <KRALogo width={200} height="auto" />
         </div>
 
-        <div style={{ width: 1, height: 44, background: '#D8DFE6', margin: '0 12px' }} />
+        <div style={{ width: 1, height: 44, background: '#D8DFE6', margin: '0 6px' }} />
 
         <div>
           <div style={{ fontSize: 18, fontWeight: 800, color: '#1A2B1F', display: 'flex', alignItems: 'center', gap: 8 }}>
