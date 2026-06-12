@@ -79,7 +79,7 @@ export default function NavBar() {
         boxShadow: '0 2px 6px rgba(0,40,80,0.1)',
       }}>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <KRALogo width={280} height="auto" />
+          <KRALogo width={200} height="auto" />
         </div>
 
         <div style={{ width: 1, height: 44, background: '#D8DFE6', margin: '0 12px' }} />
