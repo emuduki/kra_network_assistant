@@ -68,7 +68,7 @@ function Bubble({ msg }) {
       )}
       <div style={{
         maxWidth: "76%", padding: "11px 15px", borderRadius: 12, fontSize: 13, lineHeight: 1.7,
-        background:          isUser ? T.kraGreen  : T.surface,
+        background:          isUser ? T.kraGreenDark : T.surface,
         color:               isUser ? "#fff"      : T.text,
         border:              isUser ? "none"      : `1px solid ${T.border}`,
         borderBottomRightRadius: isUser ? 2 : 12,

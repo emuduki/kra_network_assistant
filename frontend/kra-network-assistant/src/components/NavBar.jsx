@@ -79,7 +79,7 @@ export default function NavBar() {
         boxShadow: '0 2px 6px rgba(0,40,80,0.1)',
       }}>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <KRALogo height={60} />
+          <KRALogo height={85} />
         </div>
 
         <div style={{ width: 1, height: 40, background: '#D8DFE6', margin: '0 8px' }} />
@@ -117,7 +117,7 @@ export default function NavBar() {
         background: '#FFFFFF', padding: '0 24px',
         display: 'flex', alignItems: 'stretch', gap: 2, height: 44,
         boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
-        borderBottom: '2px solid #C8102E'
+        borderBottom: '1px solid #D8DFE6'
       }}>
         {NAV_ITEMS.map(n => {
           const base = (user?.role === 'admin') ? '/pages/admin' : '/pages/ict_officer';
@@ -131,8 +131,8 @@ export default function NavBar() {
               onClick={() => navigate(pathForRole)}
               style={{
                 padding: '0 18px', background: 'transparent',
-                border: 'none', borderBottom: active ? '3px solid #C8102E' : '3px solid transparent',
-                color: active ? '#C8102E' : '#6B7C72',
+                border: 'none', borderBottom: active ? '3px solid #1A1A1A' : '3px solid transparent',
+                color: active ? '#1A1A1A' : '#6B7C72',
                 fontFamily: 'inherit', fontSize: 12.5,
                 fontWeight: active ? 700 : 400,
                 cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 7,

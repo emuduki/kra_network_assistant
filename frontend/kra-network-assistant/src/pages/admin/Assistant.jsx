@@ -30,7 +30,7 @@ function Message({ msg }) {
       )}
       <div style={{
         maxWidth: '76%', padding: '12px 16px', borderRadius: 3, fontSize: 13, lineHeight: 1.7,
-        background: isUser ? '#C8102E' : '#FFFFFF',
+        background: isUser ? '#1A1A1A' : '#FFFFFF',
         color: isUser ? 'white' : '#1A2B1F',
         border: isUser ? 'none' : '1px solid #D8DFE6',
         boxShadow: isUser ? 'none' : '0 1px 4px rgba(0,40,80,0.06)',
